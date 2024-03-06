@@ -1,15 +1,24 @@
+"use client";
+
 import { Switch } from "@material-tailwind/react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const DARK_MODE = "dark",
     LIGHT_MODE = "light";
 
 export default function SwitchColorMode() {
     const { theme, setTheme } = useTheme();
+    const [switchState, setSwitchState] = useState(true);
 
     const handleChangeColorMode = () => {
+        setSwitchState(!switchState);
         setTheme(theme === DARK_MODE ? LIGHT_MODE : DARK_MODE);
     };
 
-    return <Switch crossOrigin onChange={handleChangeColorMode} />;
+    useEffect(() => {
+        setSwitchState(localStorage.getItem("theme") === "dark");
+    }, []);
+
+    return <Switch checked={switchState} onChange={handleChangeColorMode} />;
 }
