@@ -18,7 +18,7 @@ export default function NavigationLinks() {
     const pathName = usePathname();
 
     return (
-        <ul className="flex gap-3 text-sm font-normal">
+        <ul className="hidden lg:flex gap-3 text-sm font-normal">
             {NAVIGATION_LIST.map((navItem) => {
                 return (
                     <Link

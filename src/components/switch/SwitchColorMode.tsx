@@ -20,5 +20,14 @@ export default function SwitchColorMode() {
         setSwitchState(localStorage.getItem("theme") === "dark");
     }, []);
 
-    return <Switch checked={switchState} onChange={handleChangeColorMode} />;
+    return (
+        <Switch
+            checked={switchState}
+            onChange={handleChangeColorMode}
+            labelProps={{
+                className: theme === "dark" ? "text-black" : "text-white",
+            }}
+            label="Dark mode"
+        />
+    );
 }
