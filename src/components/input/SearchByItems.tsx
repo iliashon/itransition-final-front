@@ -26,7 +26,7 @@ export default function SearchByItems() {
 
     return (
         <form
-            className="w-[300px] h-[36px] relative hidden lg:block"
+            className="w-1/3 h-[36px] relative hidden lg:block"
             onSubmit={handleSubmitSearch}
         >
             <input
