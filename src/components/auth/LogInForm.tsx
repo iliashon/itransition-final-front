@@ -55,7 +55,7 @@ export default function LogInForm() {
                             icon={<PiWarningCircle className="h-6 w-6" />}
                             className="mt-3 py-3"
                         >
-                            {errors.email.message}
+                            q{errors.email.message}
                         </Alert>
                     ) : (
                         ""
@@ -72,7 +72,7 @@ export default function LogInForm() {
                                 message: "Minimum 8 characters",
                             },
                         })}
-                        className={`${style.input} ${errors.password ? "border-red-500 text-red-500" : ""}`}
+                        className={`${style.input} pr-10 ${errors.password ? "border-red-500 text-red-500" : ""}`}
                     />
                     {isHiddenPass ? (
                         <IoEyeOffOutline

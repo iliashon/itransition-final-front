@@ -50,7 +50,12 @@ export default function AuthModal() {
                             Sign Up
                         </Tab>
                     </TabsHeader>
-                    <TabsBody>
+                    <TabsBody
+                        animate={{
+                            initial: { y: 0 },
+                            unmount: { y: 0, x: 300 },
+                        }}
+                    >
                         <TabPanel value="login">
                             <LogInForm />
                         </TabPanel>
