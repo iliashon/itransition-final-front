@@ -25,7 +25,7 @@ export default function SwitchColorMode() {
             checked={switchState}
             onChange={handleChangeColorMode}
             labelProps={{
-                className: theme === "dark" ? "text-black" : "text-white",
+                className: `${theme === "dark" ? "text-white" : "text-black"} text-sm`,
             }}
             label="Dark mode"
         />
