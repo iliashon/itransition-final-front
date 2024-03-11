@@ -6,6 +6,7 @@ import { Alert } from "@material-tailwind/react";
 import { PiWarningCircle } from "react-icons/pi";
 import { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import useAuth from "@/hooks/useAuth";
 
 const REGEX_EMAIL = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
@@ -20,9 +21,11 @@ export default function LogInForm() {
         handleSubmit,
         formState: { errors },
     } = useForm<TLogInForm>();
+    const { login } = useAuth();
 
-    const onSubmitForm: SubmitHandler<TLogInForm> = (data) => {
+    const onSubmitForm: SubmitHandler<TLogInForm> = async (data) => {
         console.log(data);
+        await login(data);
     };
 
     const handleShowPass = () => {

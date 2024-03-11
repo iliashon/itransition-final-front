@@ -5,6 +5,7 @@ import TSignInForm from "@/types/auth/TSignInForm";
 import TLogInForm from "@/types/auth/TLogInForm";
 import { Alert } from "@material-tailwind/react";
 import { PiWarningCircle } from "react-icons/pi";
+import useAuth from "@/hooks/useAuth";
 
 const REGEX_EMAIL = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
@@ -15,14 +16,17 @@ const style = {
 export default function SignUpForm() {
     const [isHiddenPass, setIsHiddenPass] = useState(true);
 
+    const { register: registration } = useAuth();
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<TSignInForm>();
 
-    const onSubmitForm: SubmitHandler<TLogInForm> = (data) => {
+    const onSubmitForm: SubmitHandler<TSignInForm> = async (data) => {
         console.log(data);
+        await registration(data);
     };
 
     const handleShowPass = () => {
