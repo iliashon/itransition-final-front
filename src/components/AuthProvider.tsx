@@ -23,7 +23,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
             router.push("/");
         }
         setLoading(false);
-    }, []);
+    }, [pathName]);
 
     return <>{loading ? <ClipLoader /> : children}</>;
 }

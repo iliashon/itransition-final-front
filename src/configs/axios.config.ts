@@ -1,4 +1,7 @@
 import axios from "axios";
+import setItemsLocalStorage from "@/utils/setItemLocalStorage";
+import TResponseAuth from "@/types/auth/TResponseLogin";
+import clearLocalStorage from "@/utils/clearLocalStorage";
 
 export const API_ENDPOINT = "http://localhost:4145";
 
@@ -25,12 +28,19 @@ api.interceptors.response.use(
         ) {
             originalRequest._isRetry = true;
             try {
-                const res = await axios.post(`${API_ENDPOINT}/auth/refresh`, {
-                    withCredentials: true,
+                const res = await axios.post<TResponseAuth>(
+                    `${API_ENDPOINT}/auth/refresh`,
+                    {
+                        withCredentials: true,
+                    },
+                );
+                setItemsLocalStorage({
+                    userData: res.data.user,
+                    token: res.data.accessToken,
                 });
-                localStorage.setItem("token", res.data.accessToken);
                 return api.request(originalRequest);
             } catch (err) {
+                clearLocalStorage();
                 console.log(err);
             }
         }

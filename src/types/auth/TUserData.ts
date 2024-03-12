@@ -4,6 +4,7 @@ type TUserData = {
     password: string;
     first_name: string;
     last_name: string;
+    image_url: string;
     is_admin: boolean;
     blocked: boolean;
     created_at: Date;

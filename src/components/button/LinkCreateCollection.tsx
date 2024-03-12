@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function LinkCreateCollection() {
     return (
-        <Link href="#">
+        <Link href="/collections/create">
             <Tooltip
                 content="Create collection"
                 placement="left"
