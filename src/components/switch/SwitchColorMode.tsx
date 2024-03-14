@@ -2,27 +2,37 @@
 
 import { Switch } from "@material-tailwind/react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const DARK_MODE = "dark",
     LIGHT_MODE = "light";
 
 export default function SwitchColorMode() {
     const { theme, setTheme } = useTheme();
-    const [switchState, setSwitchState] = useState(true);
+    const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
 
-    const handleChangeColorMode = () => {
-        setSwitchState(!switchState);
-        setTheme(theme === DARK_MODE ? LIGHT_MODE : DARK_MODE);
+    const handleChangeColorMode = (event: ChangeEvent<HTMLInputElement>) => {
+        const isDark = event.target.checked;
+        setIsDarkMode(isDark);
+        setTheme(isDark ? DARK_MODE : LIGHT_MODE);
+        document.documentElement.setAttribute(
+            "data-color-mode",
+            isDark ? DARK_MODE : LIGHT_MODE,
+        );
     };
 
     useEffect(() => {
-        setSwitchState(localStorage.getItem("theme") === "dark");
+        const mode = localStorage.getItem("theme");
+        setIsDarkMode(mode === DARK_MODE);
+        document.documentElement.setAttribute(
+            "data-color-mode",
+            mode === DARK_MODE ? DARK_MODE : LIGHT_MODE,
+        );
     }, []);
 
     return (
         <Switch
-            checked={switchState}
+            checked={isDarkMode}
             onChange={handleChangeColorMode}
             labelProps={{
                 className: `${theme === "dark" ? "text-white" : "text-black"} text-sm`,

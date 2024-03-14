@@ -8,9 +8,6 @@ import Logo from "@/components/layout/Logo";
 import TUserData from "@/types/auth/TUserData";
 import getUserData from "@/utils/getUserData";
 import UserMenu from "@/components/layout/UserMenu";
-import Link from "next/link";
-import { IoMdAdd } from "react-icons/io";
-import { Button, Tooltip } from "@material-tailwind/react";
 import LinkCreateCollection from "@/components/button/LinkCreateCollection";
 
 export default function Header() {

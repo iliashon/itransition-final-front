@@ -1,7 +1,7 @@
 import { Option, Select } from "@material-tailwind/react";
 import { useState } from "react";
 
-export default function LangMenu() {
+export default function SelectLanguage() {
     const [activeLang, setActiveLang] = useState<string>("");
 
     return (

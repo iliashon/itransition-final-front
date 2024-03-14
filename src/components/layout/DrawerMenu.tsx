@@ -6,7 +6,7 @@ import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import Logo from "@/components/layout/Logo";
 import SwitchColorMode from "@/components/switch/SwitchColorMode";
-import LangMenu from "@/components/layout/LangMenu";
+import SelectLanguage from "@/components/select/SelectLanguage";
 
 export default function DrawerMenu() {
     const [isOpenDrawer, setIsOpenDrawer] = useState(false);
@@ -42,7 +42,7 @@ export default function DrawerMenu() {
                 </div>
                 <div></div>
                 <div className="flex flex-col gap-5 p-4 items-start">
-                    <LangMenu />
+                    <SelectLanguage />
                     <SwitchColorMode />
                 </div>
             </Drawer>

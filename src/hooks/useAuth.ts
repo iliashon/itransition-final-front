@@ -57,6 +57,7 @@ export default function useAuth() {
         } catch (err) {
             console.log(err);
             clearLocalStorage();
+            reloadPage();
         } finally {
             setLoading(false);
         }
