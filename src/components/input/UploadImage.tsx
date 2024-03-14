@@ -1,18 +1,18 @@
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
+import uploadImage from "@/serverActions/uploadImage";
 
 const VALID_FORMAT_FILE = ["image/webp", "image/jpg", "image/png"];
 const MAX_SIZE_FILE = 2097152;
 
 export default function UploadImage() {
-    const [image, setImage] = useState<string | undefined>();
+    const [image, setImage] = useState<File | undefined>();
     const [isError, setIsError] = useState<boolean>(false);
 
     const handleSetImage = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
             const file = event.target.files[0];
-            console.log(file.size);
             if (
                 !VALID_FORMAT_FILE.includes(file.type) ||
                 file.size > MAX_SIZE_FILE
@@ -20,11 +20,18 @@ export default function UploadImage() {
                 setIsError(true);
             } else {
                 setIsError(false);
-                setImage(URL.createObjectURL(file));
+                setImage(file);
             }
         } else {
             setIsError(true);
         }
+    };
+
+    const handleCreateCollection = async () => {
+        const formData = new FormData();
+        formData.append("file", image!);
+        const dropboxImgUrl = await uploadImage(formData);
+        console.log(dropboxImgUrl);
     };
 
     return (
@@ -50,13 +57,19 @@ export default function UploadImage() {
             </p>
             {image && (
                 <Image
-                    src={image}
+                    src={URL.createObjectURL(image)}
                     width={100}
                     height={100}
                     alt="upload image"
                     className="absolute bg-white w-full h-full object-contain z-10"
                 />
             )}
+            <button
+                onClick={handleCreateCollection}
+                className="bg-black p-4 text-white absolute -top-20"
+            >
+                Upload
+            </button>
         </div>
     );
 }
