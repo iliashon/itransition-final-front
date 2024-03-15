@@ -17,6 +17,7 @@ import { useSearchParams } from "next/navigation";
 
 export default function AuthModal() {
     const [isOpenModal, setIsOpenModal] = useState(false);
+    const [openTab, setOpenTab] = useState<"login" | "signup">("login");
     const urlSearchParams = useSearchParams();
 
     const handleOpenModal = () => {
@@ -41,19 +42,34 @@ export default function AuthModal() {
                 handler={handleOpenModal}
                 className="focus:outline-none"
             >
-                <Tabs value="login">
+                <Tabs value={openTab}>
                     <TabsHeader>
-                        <Tab value="login" className="text-lg font-bold">
+                        <Tab
+                            value="login"
+                            className="text-lg font-bold"
+                            onClick={() => setOpenTab("login")}
+                        >
                             Log In
                         </Tab>
-                        <Tab value="signup" className="text-lg font-bold">
+                        <Tab
+                            value="signup"
+                            className="text-lg font-bold"
+                            onClick={() => setOpenTab("signup")}
+                        >
                             Sign Up
                         </Tab>
                     </TabsHeader>
                     <TabsBody
                         animate={{
-                            initial: { y: 0 },
-                            unmount: { y: 0, x: 300 },
+                            initial: {
+                                x: openTab === "login" ? 400 : -400,
+                            },
+                            mount: {
+                                x: 0,
+                            },
+                            unmount: {
+                                x: openTab === "login" ? 400 : -400,
+                            },
                         }}
                     >
                         <TabPanel value="login">
