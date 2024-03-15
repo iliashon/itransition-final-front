@@ -2,6 +2,7 @@ import axios from "axios";
 import setItemsLocalStorage from "@/utils/setItemLocalStorage";
 import TResponseAuth from "@/types/auth/TResponseLogin";
 import clearLocalStorage from "@/utils/clearLocalStorage";
+import reloadPage from "@/utils/reloadPage";
 
 export const API_ENDPOINT = "http://localhost:4145";
 
@@ -41,6 +42,7 @@ api.interceptors.response.use(
                 return api.request(originalRequest);
             } catch (err) {
                 clearLocalStorage();
+                // reloadPage();
                 console.log(err);
             }
         }

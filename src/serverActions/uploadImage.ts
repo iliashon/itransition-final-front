@@ -1,7 +1,7 @@
 "use server";
 export default async function uploadImage(
     file: FormData,
-): Promise<string | Error> {
+): Promise<string | null> {
     try {
         const fileData = file.get("file") as File;
         const fileName = `${Date.now()}.${fileData.type.split("/")[1]}`;
@@ -29,6 +29,6 @@ export default async function uploadImage(
         ).then((res) => res.json());
         return publicLink.link;
     } catch (err) {
-        return new Error();
+        return null;
     }
 }

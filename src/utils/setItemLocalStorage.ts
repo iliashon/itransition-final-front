@@ -11,6 +11,6 @@ export default function setItemsLocalStorage({
         localStorage.setItem("userData", JSON.stringify(userData));
     }
     if (token) {
-        localStorage.setItem("token", JSON.stringify(token));
+        localStorage.setItem("token", JSON.stringify(token).slice(1, -1));
     }
 }

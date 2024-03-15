@@ -33,7 +33,7 @@ export default function SelectCollectionType({
                 >
                     {collectionTypes.map((type) => {
                         return (
-                            <Option key={type.id} value={type.id.toString()}>
+                            <Option key={type.id} value={type.name}>
                                 {type.name}
                             </Option>
                         );
