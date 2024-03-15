@@ -7,9 +7,11 @@ import SelectCollectionType from "@/components/select/SelectCollectionType";
 import UploadImage from "@/components/input/UploadImage";
 import CollectionService from "@/services/collection.service";
 import TCreateCollectionData from "@/types/collection/TCreateCollectionData";
+import { useRouter } from "next/navigation";
 
 export default function CreateCollection() {
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
     const [stateCreateCollection, setStateCreateCollection] =
         useState<TCreateCollectionData>({
             name: "",
@@ -42,7 +44,7 @@ export default function CreateCollection() {
             ...stateCreateCollection,
         });
         setLoading(false);
-        console.log(newCollection);
+        router.push(`/collection/${newCollection.data.id}`);
     };
 
     return (

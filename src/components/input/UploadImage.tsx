@@ -24,9 +24,9 @@ export default function UploadImage({
         if (event.target.files) {
             const file = event.target.files[0];
             if (!VALID_FORMAT_FILE.includes(file.type)) {
-                setError("Invalid [id] type, acceptable: PNG, JPG, WEBP");
+                setError("Invalid image type, acceptable: PNG, JPG, WEBP");
             } else if (file.size > MAX_SIZE_FILE) {
-                setError("Maximum [id] size 2 MB");
+                setError("Maximum image size 2 MB");
             } else {
                 setError(null);
                 const fileFormData = new FormData();
@@ -57,7 +57,7 @@ export default function UploadImage({
                 <div className="flex flex-col gap-1 items-center">
                     <span className="font-semibold">Drop image here</span>
                     <span className="text-sm text-gray-500">or</span>
-                    <span className="font-semibold text-sm bg-black text-white py-2 px-4 rounded-lg">
+                    <span className="font-semibold text-sm bg-black text-white py-2 px-4 rounded-lg dark:bg-white dark:text-black">
                         Choose File
                     </span>
                 </div>
