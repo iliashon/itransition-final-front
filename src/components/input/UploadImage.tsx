@@ -24,9 +24,9 @@ export default function UploadImage({
         if (event.target.files) {
             const file = event.target.files[0];
             if (!VALID_FORMAT_FILE.includes(file.type)) {
-                setError("Invalid file type, acceptable: PNG, JPG, WEBP");
+                setError("Invalid [id] type, acceptable: PNG, JPG, WEBP");
             } else if (file.size > MAX_SIZE_FILE) {
-                setError("Maximum file size 2 MB");
+                setError("Maximum [id] size 2 MB");
             } else {
                 setError(null);
                 const fileFormData = new FormData();
