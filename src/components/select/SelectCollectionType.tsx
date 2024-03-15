@@ -8,7 +8,7 @@ export default function SelectCollectionType({
     setValue,
 }: {
     value: string | undefined;
-    setValue: (value: string | undefined) => void;
+    setValue: (value: string) => void;
 }) {
     const [collectionTypes, setCollectionTypes] = useState<TCollectionType[]>();
 
@@ -29,7 +29,7 @@ export default function SelectCollectionType({
                     }}
                     color="gray"
                     value={value}
-                    onChange={(value) => setValue(value)}
+                    onChange={(value) => setValue(value!)}
                 >
                     {collectionTypes.map((type) => {
                         return (

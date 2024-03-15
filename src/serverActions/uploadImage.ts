@@ -1,33 +1,22 @@
 "use server";
+import TFolderName from "@/types/imageUpload/TFolderType";
+
 export default async function uploadImage(
-    file: FormData,
+    data: FormData,
+    folder_name: TFolderName,
 ): Promise<string | null> {
     try {
-        const fileData = file.get("file") as File;
-        const fileName = `${Date.now()}.${fileData.type.split("/")[1]}`;
-        await fetch("https://content.dropboxapi.com/2/files/upload", {
-            method: "POST",
-            body: fileData,
-            headers: {
-                Authorization: `Bearer ${process.env.DROPBOX_TOKEN}`,
-                "Content-Type": "application/octet-stream",
-                "Dropbox-API-Arg": JSON.stringify({
-                    path: `/user-images/${fileName}`,
-                }),
-            },
-        });
-        const publicLink = await fetch(
-            "https://api.dropboxapi.com/2/files/get_temporary_link",
+        data.append("upload_preset", process.env.CLOUDINARY_PRESET!);
+        data.append("folder", folder_name);
+        data.append("public_id", Date.now().toString());
+        const { url } = await fetch(
+            `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`,
             {
                 method: "POST",
-                body: JSON.stringify({ path: `/user-images/${fileName}` }),
-                headers: {
-                    Authorization: `Bearer ${process.env.DROPBOX_TOKEN}`,
-                    "Content-Type": "application/json",
-                },
+                body: data,
             },
         ).then((res) => res.json());
-        return publicLink.link;
+        return url;
     } catch (err) {
         return null;
     }

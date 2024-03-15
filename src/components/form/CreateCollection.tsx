@@ -7,34 +7,44 @@ import SelectCollectionType from "@/components/select/SelectCollectionType";
 import UploadImage from "@/components/input/UploadImage";
 import uploadImage from "@/serverActions/uploadImage";
 import CollectionService from "@/services/collection.service";
+import TCreateCollectionData from "@/types/collection/TCreateCollectionData";
 
 export default function CreateCollection() {
-    const [activeCollectionType, setActiveCollectionType] = useState<string>();
-    const [markdownValue, setMarkdownValue] =
-        useState<string>("# New Collection");
+    const [stateCreateCollection, setStateCreateCollection] =
+        useState<TCreateCollectionData>({
+            name: "",
+            description: "# New Collection",
+            type: "",
+            image_url: "",
+        });
     const [imageFile, setImageFile] = useState<File | undefined>();
-    const [title, setTitle] = useState<string>("");
 
-    const handleActiveCollectionType = (value: string | undefined) => {
-        setActiveCollectionType(value);
+    const handleActiveCollectionType = (value: string) => {
+        setStateCreateCollection({ ...stateCreateCollection, type: value });
     };
 
     const handleMarkdownValue = (value: string) => {
-        setMarkdownValue(value);
+        setStateCreateCollection({
+            ...stateCreateCollection,
+            description: value,
+        });
     };
 
-    const handleImageFile = (file: File) => {
-        setImageFile(file);
+    const handleImageUrl = (value: string) => {
+        setStateCreateCollection({
+            ...stateCreateCollection,
+            image_url: value,
+        });
     };
 
     const handleCreateCollection = async () => {
         const fileFormData = new FormData();
         fileFormData.append("file", imageFile!);
-        const publicImageUrl = await uploadImage(fileFormData);
+        const publicImageUrl = await uploadImage(fileFormData, "user");
         const newCollection = await CollectionService.createCollection({
-            name: title,
-            description: markdownValue,
-            type: activeCollectionType as string,
+            name: stateCreateCollection.name,
+            description: stateCreateCollection.description,
+            type: stateCreateCollection.type,
             image_url: publicImageUrl || "",
         });
         console.log(newCollection);
@@ -47,22 +57,27 @@ export default function CreateCollection() {
                     type="text"
                     className="border dark:border-white border-black/30 bg-transparent rounded w-full h-12 px-3 text-xl focus:outline-none"
                     placeholder="Title"
-                    value={title}
-                    onChange={(event) => setTitle(event.target.value)}
+                    value={stateCreateCollection.name}
+                    onChange={(event) =>
+                        setStateCreateCollection({
+                            ...stateCreateCollection,
+                            name: event.target.value,
+                        })
+                    }
                 />
                 <EditMarkdown
-                    value={markdownValue}
-                    setValue={handleMarkdownValue}
+                    value={stateCreateCollection.description}
+                    handleOnChange={handleMarkdownValue}
                 />
             </div>
             <div className="flex flex-col justify-between">
                 <div className="flex flex-col gap-5">
                     <UploadImage
-                        fileValue={imageFile}
-                        setFileValue={handleImageFile}
+                        value={stateCreateCollection.image_url}
+                        setImageUrl={handleImageUrl}
                     />
                     <SelectCollectionType
-                        value={activeCollectionType}
+                        value={stateCreateCollection.type}
                         setValue={handleActiveCollectionType}
                     />
                     <div className="border dark:border-white border-black/30 rounded h-64"></div>
