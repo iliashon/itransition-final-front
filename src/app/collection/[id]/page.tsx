@@ -3,6 +3,8 @@ import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
 import Error from "next/error";
 import PreviewMarkdown from "@/components/markdown/PreviewMarkdown";
+import ItemTable from "@/components/table/ItemTable";
+import Link from "next/link";
 
 export default async function CollectionPreview({
     params,
@@ -31,10 +33,17 @@ export default async function CollectionPreview({
                     <Image
                         src={collection.image_url}
                         alt="image"
-                        className="w-full rounded-xl"
+                        className="w-full rounded-xl mb-5"
                         width={500}
                         height={500}
                     />
+                    <ItemTable />
+                    <Link
+                        href={`/item/create/${collection.id}`}
+                        className="bg-gray-600 py-2 justify-center rounded-full text-white flex mt-5"
+                    >
+                        Create Item
+                    </Link>
                 </div>
             </section>
         );

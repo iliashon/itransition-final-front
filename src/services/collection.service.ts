@@ -11,6 +11,10 @@ class CollectionService {
         );
     }
 
+    async getAll() {
+        return axios.get<TCollectionData[]>("http://localhost:4145/collection");
+    }
+
     async getById(id: number) {
         return axios.get<TCollectionData>(
             `http://localhost:4145/collection/${id}`,

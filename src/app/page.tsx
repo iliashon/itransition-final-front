@@ -18,7 +18,7 @@ export default function Home() {
                     </p>
                     <div className="flex gap-5 items-center">
                         <Link
-                            href="#"
+                            href="/collection/list"
                             className="bg-black dark:bg-white dark:text-black py-2 w-40 rounded-lg text-white flex justify-center text-sm font-semibold hover:shadow duration-300"
                         >
                             Collections

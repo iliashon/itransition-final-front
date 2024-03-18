@@ -5,6 +5,7 @@ import uploadImage from "@/serverActions/uploadImage";
 import { Alert } from "@material-tailwind/react";
 import { MdErrorOutline } from "react-icons/md";
 import { ClipLoader } from "react-spinners";
+import TFolderName from "@/types/imageUpload/TFolderType";
 
 const VALID_FORMAT_FILE = ["image/webp", "image/jpg", "image/png"];
 const MAX_SIZE_FILE = 2097152;
@@ -12,9 +13,11 @@ const MAX_SIZE_FILE = 2097152;
 export default function UploadImage({
     value,
     setImageUrl,
+    folder_name,
 }: {
     value: string | null;
     setImageUrl: (value: string) => void;
+    folder_name: TFolderName;
 }) {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
@@ -23,7 +26,8 @@ export default function UploadImage({
         setLoading(true);
         if (event.target.files) {
             const file = event.target.files[0];
-            if (!VALID_FORMAT_FILE.includes(file.type)) {
+            if (!file) {
+            } else if (!VALID_FORMAT_FILE.includes(file.type)) {
                 setError("Invalid image type, acceptable: PNG, JPG, WEBP");
             } else if (file.size > MAX_SIZE_FILE) {
                 setError("Maximum image size 2 MB");
@@ -33,7 +37,7 @@ export default function UploadImage({
                 fileFormData.append("file", file);
                 const publicImageUrl = await uploadImage(
                     fileFormData,
-                    "collection",
+                    folder_name,
                 );
                 setImageUrl(publicImageUrl!);
             }

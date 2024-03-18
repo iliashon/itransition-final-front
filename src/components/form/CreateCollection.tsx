@@ -72,6 +72,7 @@ export default function CreateCollection() {
                     <UploadImage
                         value={stateCreateCollection.image_url}
                         setImageUrl={handleImageUrl}
+                        folder_name="collection"
                     />
                     <SelectCollectionType
                         value={stateCreateCollection.type}
