@@ -20,7 +20,7 @@ export default function useAuth() {
                 userData: userData.user,
                 token: userData.accessToken,
             });
-            // reloadPage();
+            reloadPage();
         } catch (err) {
             console.log(err);
         } finally {
@@ -56,8 +56,8 @@ export default function useAuth() {
             });
         } catch (err) {
             console.log(err);
-            // clearLocalStorage();
-            // reloadPage();
+            clearLocalStorage();
+            reloadPage();
         } finally {
             setLoading(false);
         }
