@@ -2,13 +2,12 @@ import axios from "axios";
 import setItemsLocalStorage from "@/utils/setItemLocalStorage";
 import TResponseAuth from "@/types/auth/TResponseLogin";
 import clearLocalStorage from "@/utils/clearLocalStorage";
-import reloadPage from "@/utils/reloadPage";
 
-export const API_ENDPOINT = "http://localhost:4145";
+export const API_HOST = "http://localhost:4145";
 
 export const api = axios.create({
     withCredentials: true,
-    baseURL: API_ENDPOINT,
+    baseURL: API_HOST,
 });
 
 api.interceptors.request.use((config) => {
@@ -30,7 +29,7 @@ api.interceptors.response.use(
             originalRequest._isRetry = true;
             try {
                 const res = await axios.post<TResponseAuth>(
-                    `${API_ENDPOINT}/auth/refresh`,
+                    `${API_HOST}/auth/refresh`,
                     {
                         withCredentials: true,
                     },

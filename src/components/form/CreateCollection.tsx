@@ -8,16 +8,17 @@ import UploadImage from "@/components/input/UploadImage";
 import CollectionService from "@/services/collection.service";
 import TCreateCollectionData from "@/types/collection/TCreateCollectionData";
 import { useRouter } from "next/navigation";
+import TCollectionData from "@/types/collection/TCollectionData";
 
-export default function CreateCollection() {
+export default function CreateCollection({ data }: { data?: TCollectionData }) {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const [stateCreateCollection, setStateCreateCollection] =
         useState<TCreateCollectionData>({
-            name: "",
-            description: "# New Collection",
-            type: "",
-            image_url: "",
+            name: data?.name || "",
+            description: data?.description || "# New Collection",
+            type: data?.type || "",
+            image_url: data?.image_url || "",
         });
 
     const handleActiveCollectionType = (value: string) => {
@@ -40,11 +41,24 @@ export default function CreateCollection() {
 
     const handleCreateCollection = async () => {
         setLoading(true);
-        const newCollection = await CollectionService.createCollection({
+        const newCollection = await CollectionService.create({
             ...stateCreateCollection,
         });
         setLoading(false);
         router.push(`/collection/${newCollection.data.id}`);
+    };
+
+    const handleUpdateCollection = async () => {
+        setLoading(true);
+        const updateCollection = await CollectionService.update(
+            {
+                ...stateCreateCollection,
+            },
+            Number(data?.id),
+        );
+        setLoading(false);
+        router.push(`/collection/${updateCollection.data.id}`);
+        router.refresh();
     };
 
     return (
@@ -82,10 +96,12 @@ export default function CreateCollection() {
                 </div>
                 <Button
                     loading={loading}
-                    onClick={handleCreateCollection}
+                    onClick={
+                        data ? handleUpdateCollection : handleCreateCollection
+                    }
                     className="dark:text-black dark:bg-white flex justify-center my-5 lg:m-0"
                 >
-                    Create
+                    Send
                 </Button>
             </div>
             {loading && (

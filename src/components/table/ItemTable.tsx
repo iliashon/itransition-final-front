@@ -8,10 +8,22 @@ import {
 import TItemData from "@/types/item/TItemData";
 import { useMemo } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { MdOpenInNew } from "react-icons/md";
 
 export default function ItemTable({ data = [] }: { data?: TItemData[] }) {
     const columns = useMemo<MRT_ColumnDef<TItemData>[]>(
         () => [
+            {
+                accessorKey: "id",
+                header: "Link",
+                size: 30,
+                Cell: (props) => (
+                    <Link href={`/item/${props.row.original.id}`}>
+                        <MdOpenInNew className="h-5 w-5 text-black" />
+                    </Link>
+                ),
+            },
             {
                 accessorKey: "name",
                 header: "Name",

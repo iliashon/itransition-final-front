@@ -2,12 +2,12 @@ import TLogInForm from "@/types/auth/TLogInForm";
 import axios from "axios";
 import TResponseAuth from "@/types/auth/TResponseLogin";
 import TSignInForm from "@/types/auth/TSignInForm";
-import { api } from "@/configs/axios.config";
+import { api, API_HOST } from "@/configs/axios.config";
 
 class AuthService {
     async login(data: TLogInForm) {
         return await axios.post<TResponseAuth>(
-            "http://localhost:4145/auth/login",
+            `${API_HOST}/auth/login`,
             {
                 ...data,
             },
@@ -17,7 +17,7 @@ class AuthService {
 
     async register(data: TSignInForm) {
         return await axios.post<TResponseAuth>(
-            "http://localhost:4145/auth/register",
+            `${API_HOST}/auth/register`,
             {
                 ...data,
             },
@@ -26,7 +26,7 @@ class AuthService {
     }
 
     async refresh() {
-        return await api.post("auth/refresh");
+        return await api.post<TResponseAuth>("auth/refresh");
     }
 
     async logout() {

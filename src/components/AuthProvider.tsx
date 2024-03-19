@@ -5,8 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { ClipLoader } from "react-spinners";
 import useAuth from "@/hooks/useAuth";
 import PRIVATE_ROUTE_LIST from "@/configs/private.routes.config";
-import { retry } from "next/dist/compiled/@next/font/dist/google/retry";
-import clearLocalStorage from "@/utils/clearLocalStorage";
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
     const [loading, setLoading] = useState(true);
@@ -16,15 +14,13 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         if (localStorage.getItem("token")) {
-            refresh();
-        }
-        if (
-            !localStorage.getItem("token") &&
-            PRIVATE_ROUTE_LIST.includes(pathName)
-        ) {
+            refresh().then(() => setLoading(false));
+        } else if (PRIVATE_ROUTE_LIST.includes(pathName)) {
+            setLoading(false);
             router.push("/");
+        } else {
+            setLoading(false);
         }
-        setLoading(false);
     }, [pathName]);
 
     return (
