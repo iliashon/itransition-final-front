@@ -3,7 +3,7 @@ import setItemsLocalStorage from "@/utils/setItemLocalStorage";
 import TResponseAuth from "@/types/auth/TResponseLogin";
 import clearLocalStorage from "@/utils/clearLocalStorage";
 
-export const API_HOST = "http://localhost:4145";
+export const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 
 export const api = axios.create({
     withCredentials: true,
