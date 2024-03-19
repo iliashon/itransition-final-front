@@ -71,6 +71,9 @@ export default function AllCollectionTable() {
         state: {
             isLoading: loading,
         },
+        muiTableContainerProps: {
+            sx: { height: "600px" },
+        },
         enableRowActions: !!userData,
         renderRowActions: ({ row }) => {
             if (userData?.id === row.original.user_id || userData?.is_admin) {

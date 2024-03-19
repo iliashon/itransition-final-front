@@ -6,17 +6,20 @@ import UploadImage from "@/components/input/UploadImage";
 import { Button } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 import ItemService from "@/services/item.service";
+import TItemData from "@/types/item/TItemData";
 
 export default function CreateItem({
     collection_id,
+    data,
 }: {
+    data?: TItemData;
     collection_id: string;
 }) {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const [stateCreateItem, setStateCreateItem] = useState<TCreateItemData>({
-        name: "",
-        image_url: "",
+        name: data?.name || "",
+        image_url: data?.image_url || "",
         collection_id: Number(collection_id),
     });
 
@@ -34,6 +37,19 @@ export default function CreateItem({
         });
         setLoading(false);
         router.push(`/item/${newItem.data.id}`);
+    };
+
+    const handleUpdateItem = async () => {
+        setLoading(true);
+        const newItem = await ItemService.update(
+            {
+                ...stateCreateItem,
+            },
+            Number(data?.id),
+        );
+        setLoading(false);
+        router.push(`/item/${newItem.data.id}`);
+        router.refresh();
     };
 
     return (
@@ -60,10 +76,10 @@ export default function CreateItem({
                 />
                 <Button
                     loading={loading}
-                    onClick={handleCreateItem}
+                    onClick={data ? handleUpdateItem : handleCreateItem}
                     className="dark:text-black dark:bg-white flex justify-center my-5 lg:m-0"
                 >
-                    Create
+                    {data ? "Update" : "Create"}
                 </Button>
             </div>
         </section>
