@@ -35,7 +35,7 @@ export default function CommentBlock({ item_id }: { item_id: number }) {
                     ? "Loading..."
                     : comments?.map((comment) => {
                           return (
-                              <div className="flex gap-3">
+                              <div className="flex gap-3" key={comment.id}>
                                   {comment.user.image_url ? (
                                       <Avatar
                                           src={comment.user.image_url}
