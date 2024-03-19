@@ -13,16 +13,19 @@ import { MdOpenInNew } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import TUserData from "@/types/auth/TUserData";
 import getUserData from "@/utils/getUserData";
+import CollectionService from "@/services/collection.service";
 
-export default function AllCollectionTable({
-    data = [],
-}: {
-    data?: TCollectionData[];
-}) {
+export default function AllCollectionTable() {
     const [userData, setUserData] = useState<TUserData | null>();
+    const [data, setData] = useState<TCollectionData[]>();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setUserData(getUserData());
+        CollectionService.getAll().then((res) => {
+            setData(res.data);
+            setLoading(false);
+        });
     }, []);
 
     const columns = useMemo<MRT_ColumnDef<TCollectionData>[]>(
@@ -64,7 +67,10 @@ export default function AllCollectionTable({
 
     const table = useMaterialReactTable({
         columns,
-        data,
+        data: data || [],
+        state: {
+            isLoading: loading,
+        },
         enableRowActions: !!userData,
         renderRowActions: ({ row }) => {
             if (userData?.id === row.original.user_id || userData?.is_admin) {
