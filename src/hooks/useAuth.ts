@@ -20,7 +20,7 @@ export default function useAuth() {
                 userData: userData.user,
                 token: userData.accessToken,
             });
-            reloadPage();
+            // reloadPage();
         } catch (err) {
             console.log(err);
         } finally {
