@@ -1,7 +1,6 @@
-import CreateCollection from "@/components/form/CreateCollection";
 import CollectionService from "@/services/collection.service";
 import { notFound, redirect } from "next/navigation";
-import ItemService from "@/services/item.service";
+import CollectionEdit from "@/components/collection/CollectionEdit";
 
 export default async function CollectionPreview({
     params,
@@ -12,18 +11,12 @@ export default async function CollectionPreview({
         const collection = await CollectionService.getById(
             Number(params.id),
         ).then((res) => res.data);
+
         if (collection === null) {
             notFound();
         }
-        const itemsFromCollection = await ItemService.getAll(
-            collection.id,
-        ).then((res) => res.data);
-        return (
-            <main className="px-4">
-                <h1 className="text-3xl font-bold py-7">Edit collection</h1>
-                <CreateCollection data={collection} />
-            </main>
-        );
+
+        return <CollectionEdit data={collection} />;
     } else {
         redirect("/");
     }

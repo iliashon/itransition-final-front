@@ -1,6 +1,6 @@
 "use client";
 
-import SearchByItems from "@/components/input/SearchByItems";
+import SearchByItems from "@/components/layout/SearchByItems";
 import DrawerMenu from "@/components/layout/DrawerMenu";
 import AuthModal from "@/components/auth/AuthModal";
 import { Suspense, useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import Logo from "@/components/layout/Logo";
 import TUserData from "@/types/auth/TUserData";
 import getUserData from "@/utils/getUserData";
 import UserMenu from "@/components/layout/UserMenu";
-import LinkCreateCollection from "@/components/button/LinkCreateCollection";
+import LinkCreateCollection from "@/components/layout/LinkCreateCollection";
 
 export default function Header() {
     const [userData, setUserData] = useState<TUserData | null>();

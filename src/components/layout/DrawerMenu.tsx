@@ -5,8 +5,8 @@ import { Button, Drawer } from "@material-tailwind/react";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import Logo from "@/components/layout/Logo";
-import SwitchColorMode from "@/components/switch/SwitchColorMode";
-import SelectLanguage from "@/components/select/SelectLanguage";
+import SwitchColorMode from "@/components/layout/SwitchColorMode";
+import SelectLanguage from "@/components/layout/SelectLanguage";
 
 export default function DrawerMenu() {
     const [isOpenDrawer, setIsOpenDrawer] = useState(false);

@@ -1,4 +1,4 @@
-import AllCollectionTable from "@/components/table/AllCollectionTable";
+import AllCollectionTable from "@/components/view/AllCollectionTable";
 
 export default function CollectionList() {
     return (

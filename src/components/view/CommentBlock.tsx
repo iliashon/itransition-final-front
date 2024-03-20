@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import TCommentList from "@/types/comment/TCommentList";
 import CommentService from "@/services/comment.service";
 import { Avatar, Button } from "@material-tailwind/react";
-import CreateComment from "@/components/form/CreateComment";
+import CreateComment from "@/components/view/CreateComment";
 import getUserData from "@/utils/getUserData";
 import TUserData from "@/types/auth/TUserData";
 

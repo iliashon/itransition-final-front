@@ -4,7 +4,6 @@ import { FaHeart } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import LikeService from "@/services/like.service";
 import TLikeData from "@/types/like/TLikeData";
-import awk from "refractor/lang/awk";
 
 export default function Like({
     item_id,

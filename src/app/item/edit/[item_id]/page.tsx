@@ -1,7 +1,6 @@
-import CollectionService from "@/services/collection.service";
 import { notFound, redirect } from "next/navigation";
 import ItemService from "@/services/item.service";
-import CreateItem from "@/components/form/CreateItem";
+import ItemEdit from "@/components/item/ItemEdit";
 
 export default async function EditItem({
     params,
@@ -12,19 +11,12 @@ export default async function EditItem({
         const item = await ItemService.getById(Number(params.item_id)).then(
             (res) => res.data,
         );
+
         if (item === null) {
             notFound();
         }
 
-        return (
-            <main className="px-4">
-                <h1 className="text-3xl font-bold py-7">Edit collection</h1>
-                <CreateItem
-                    collection_id={item.collection_id.toString()}
-                    data={item}
-                />
-            </main>
-        );
+        return <ItemEdit collection_id={item.collection_id} data={item} />;
     } else {
         redirect("/");
     }

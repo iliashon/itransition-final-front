@@ -1,4 +1,3 @@
-import { Button } from "@material-tailwind/react";
 import Link from "next/link";
 
 export default function Home() {

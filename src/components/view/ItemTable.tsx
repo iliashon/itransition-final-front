@@ -33,7 +33,7 @@ export default function ItemTable({ data = [] }: { data?: TItemData[] }) {
                 header: "Image",
                 Cell: (props) => (
                     <Image
-                        src={props.row.original.image_url}
+                        src={props.row.original.image_url || ""}
                         alt="Image"
                         width={50}
                         height={50}

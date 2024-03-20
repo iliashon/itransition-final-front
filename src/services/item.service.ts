@@ -19,7 +19,7 @@ class ItemService {
     }
 
     update(data: TCreateItemData, id: number) {
-        return axios.put(`${API_HOST}/item/${id}`, {
+        return axios.put<TItemData>(`${API_HOST}/item/${id}`, {
             ...data,
         });
     }

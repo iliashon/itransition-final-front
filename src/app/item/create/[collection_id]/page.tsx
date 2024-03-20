@@ -1,14 +1,21 @@
-import CreateItem from "@/components/form/CreateItem";
+import ItemEdit from "@/components/item/ItemEdit";
+import { notFound } from "next/navigation";
+import CollectionService from "@/services/collection.service";
 
-export default function CreateItemPage({
+export default async function CreateItemPage({
     params,
 }: {
     params: { collection_id: string };
 }) {
-    return (
-        <main className="px-4">
-            <h1 className="text-3xl font-bold py-7">Create item</h1>
-            <CreateItem collection_id={params.collection_id} />
-        </main>
-    );
+    if (!isNaN(Number(params.collection_id))) {
+        const collection = await CollectionService.getById(
+            Number(params.collection_id),
+        ).then((res) => res.data);
+        if (collection === null) {
+            notFound();
+        }
+        return <ItemEdit collection_id={Number(params.collection_id)} />;
+    } else {
+        notFound();
+    }
 }

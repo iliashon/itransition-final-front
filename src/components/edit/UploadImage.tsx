@@ -12,11 +12,11 @@ const MAX_SIZE_FILE = 2097152;
 
 export default function UploadImage({
     value,
-    setImageUrl,
+    setValue,
     folder_name,
 }: {
     value: string | null;
-    setImageUrl: (value: string) => void;
+    setValue: (value: string) => void;
     folder_name: TFolderName;
 }) {
     const [error, setError] = useState<string | null>(null);
@@ -39,7 +39,7 @@ export default function UploadImage({
                     fileFormData,
                     folder_name,
                 );
-                setImageUrl(publicImageUrl!);
+                setValue(publicImageUrl!);
             }
         } else {
             setError("Image not found");
