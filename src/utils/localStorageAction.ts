@@ -1,6 +1,10 @@
 import TUserData from "@/types/auth/TUserData";
 
-export default function setItemsLocalStorage({
+export function clearLocalStorage() {
+    localStorage.removeItem("userData");
+    localStorage.removeItem("token");
+}
+export function setItemsLocalStorage({
     userData,
     token,
 }: {

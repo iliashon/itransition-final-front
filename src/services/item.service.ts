@@ -1,11 +1,11 @@
 import axios from "axios";
 import TCreateItemData from "@/types/item/TCreateItemData";
 import TItemData from "@/types/item/TItemData";
-import { API_HOST } from "@/configs/axios.config";
+import { api, API_HOST } from "@/configs/axios.config";
 
 class ItemService {
     create(data: TCreateItemData) {
-        return axios.post<TItemData>(`${API_HOST}/item`, data);
+        return api.post<TItemData>(`${API_HOST}/item`, data);
     }
 
     getById(id: number) {
@@ -19,9 +19,13 @@ class ItemService {
     }
 
     update(data: TCreateItemData, id: number) {
-        return axios.put<TItemData>(`${API_HOST}/item/${id}`, {
+        return api.put<TItemData>(`${API_HOST}/item/${id}`, {
             ...data,
         });
+    }
+
+    delete(id: number) {
+        return api.delete(`${API_HOST}/item/${id}`);
     }
 }
 

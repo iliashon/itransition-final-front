@@ -1,9 +1,11 @@
 import { useState } from "react";
 import TLogInForm from "@/types/auth/TLogInForm";
 import AuthService from "@/services/auth.service";
-import setItemsLocalStorage from "@/utils/setItemLocalStorage";
 import TSignInForm from "@/types/auth/TSignInForm";
-import clearLocalStorage from "@/utils/clearLocalStorage";
+import {
+    setItemsLocalStorage,
+    clearLocalStorage,
+} from "@/utils/localStorageAction";
 import { useRouter } from "next/navigation";
 import reloadPage from "@/utils/reloadPage";
 

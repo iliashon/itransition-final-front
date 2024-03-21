@@ -1,7 +1,9 @@
 import axios from "axios";
-import setItemsLocalStorage from "@/utils/setItemLocalStorage";
 import TResponseAuth from "@/types/auth/TResponseLogin";
-import clearLocalStorage from "@/utils/clearLocalStorage";
+import {
+    setItemsLocalStorage,
+    clearLocalStorage,
+} from "@/utils/localStorageAction";
 
 export const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 
