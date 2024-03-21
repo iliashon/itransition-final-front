@@ -2,7 +2,6 @@ import Link from "next/link";
 import { MdDelete, MdEdit } from "react-icons/md";
 import TItemData from "@/types/item/TItemData";
 import { useRouter } from "next/navigation";
-import redirectRefresh from "@/utils/redirectRefresh";
 import ItemService from "@/services/item.service";
 
 export default function ActionItems({ item }: { item: TItemData }) {

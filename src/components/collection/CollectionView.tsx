@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { FaEdit } from "react-icons/fa";
-import Image from "next/image";
 import ItemTable from "@/components/view/ItemTable";
 import TCollectionData from "@/types/collection/TCollectionData";
 import TItemData from "@/types/item/TItemData";
