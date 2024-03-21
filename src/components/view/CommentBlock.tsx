@@ -8,6 +8,7 @@ import getUserData from "@/utils/getUserData";
 import TUserData from "@/types/auth/TUserData";
 import Avatar from "@/components/view/Avatar";
 import { useTranslation } from "react-i18next";
+
 export default function CommentBlock({ item_id }: { item_id: number }) {
     const [userData, setUserData] = useState<TUserData | null>();
     const [loading, setLoading] = useState(true);

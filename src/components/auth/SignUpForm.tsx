@@ -6,6 +6,7 @@ import TLogInForm from "@/types/auth/TLogInForm";
 import { Alert } from "@material-tailwind/react";
 import { PiWarningCircle } from "react-icons/pi";
 import useAuth from "@/hooks/useAuth";
+import { ClipLoader } from "react-spinners";
 
 const REGEX_EMAIL = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
@@ -16,7 +17,7 @@ const style = {
 export default function SignUpForm() {
     const [isHiddenPass, setIsHiddenPass] = useState(true);
 
-    const { register: registration } = useAuth();
+    const { register: registration, loading } = useAuth();
 
     const {
         register,
@@ -35,7 +36,7 @@ export default function SignUpForm() {
 
     return (
         <form
-            className="flex flex-col gap-5"
+            className="flex flex-col gap-5 relative"
             onSubmit={handleSubmit(onSubmitForm)}
         >
             <input
@@ -142,6 +143,11 @@ export default function SignUpForm() {
             <button className="bg-black text-white h-12 rounded-lg font-medium text-lg hover:opacity-70 duration-300">
                 Sign Up
             </button>
+            {loading && (
+                <div className="absolute -top-5 -bottom-4 -left-4 -right-4 rounded-xl backdrop-blur-sm flex justify-center items-center">
+                    <ClipLoader />
+                </div>
+            )}
         </form>
     );
 }

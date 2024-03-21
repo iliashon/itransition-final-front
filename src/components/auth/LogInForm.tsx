@@ -7,6 +7,7 @@ import { PiWarningCircle } from "react-icons/pi";
 import { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import useAuth from "@/hooks/useAuth";
+import { ClipLoader } from "react-spinners";
 
 const REGEX_EMAIL = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
@@ -21,10 +22,9 @@ export default function LogInForm() {
         handleSubmit,
         formState: { errors },
     } = useForm<TLogInForm>();
-    const { login } = useAuth();
+    const { login, loading } = useAuth();
 
     const onSubmitForm: SubmitHandler<TLogInForm> = async (data) => {
-        console.log(data);
         await login(data);
     };
 
@@ -35,7 +35,7 @@ export default function LogInForm() {
     return (
         <form
             onSubmit={handleSubmit(onSubmitForm)}
-            className="flex flex-col justify-between h-full"
+            className="flex flex-col justify-between h-full relative"
         >
             <div className="flex flex-col gap-7">
                 <div>
@@ -108,6 +108,11 @@ export default function LogInForm() {
             >
                 Log In
             </button>
+            {loading && (
+                <div className="absolute -top-5 -bottom-4 -left-4 -right-4 rounded-xl backdrop-blur-sm flex justify-center items-center">
+                    <ClipLoader />
+                </div>
+            )}
         </form>
     );
 }
