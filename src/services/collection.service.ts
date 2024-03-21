@@ -24,9 +24,13 @@ class CollectionService {
     }
 
     update(data: TCreateCollectionData, id: number) {
-        return axios.put(`${API_HOST}/collection/${id}`, {
+        return api.put(`${API_HOST}/collection/${id}`, {
             ...data,
         });
+    }
+
+    delete(id: number) {
+        return api.delete(`${API_HOST}/collection/${id}`);
     }
 }
 

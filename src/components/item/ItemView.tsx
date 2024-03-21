@@ -24,7 +24,7 @@ export default function ItemView({ item }: { item: TItemData }) {
                 </div>
                 <div>
                     <Image
-                        src={item.image_url || ""}
+                        src={item.image_url || "/imageNotFound.jpeg"}
                         alt="image"
                         className="w-full rounded-xl mb-5"
                         width={500}
