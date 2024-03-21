@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import TCreateItemData from "@/types/item/TCreateItemData";
 import { Tag } from "react-tag-input";
 import ItemService from "@/services/item.service";
-import Tags from "@/components/edit/Tags";
+import InputTags from "@/components/edit/InputTags";
 import UploadImage from "@/components/edit/UploadImage";
 import { Button } from "@material-tailwind/react";
 
@@ -77,7 +77,7 @@ export default function ItemEdit({
                             })
                         }
                     />
-                    <Tags setTags={handleTags} tags={data?.tags} />
+                    <InputTags setTags={handleTags} tags={data?.tags} />
                 </div>
                 <div className="flex flex-col justify-between gap-5">
                     <UploadImage

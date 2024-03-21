@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import TCommentList from "@/types/comment/TCommentList";
 import CommentService from "@/services/comment.service";
-import { Avatar, Button } from "@material-tailwind/react";
 import CreateComment from "@/components/view/CreateComment";
 import getUserData from "@/utils/getUserData";
 import TUserData from "@/types/auth/TUserData";
+import Avatar from "@/components/view/Avatar";
 
 export default function CommentBlock({ item_id }: { item_id: number }) {
     const [userData, setUserData] = useState<TUserData | null>();
@@ -26,8 +26,8 @@ export default function CommentBlock({ item_id }: { item_id: number }) {
     };
 
     return (
-        <div className="my-5">
-            <h2 className="text-xl font-semibold text-center">
+        <div className="max-w-[700px] mx-auto mt-5">
+            <h2 className="text-2xl font-semibold text-center">
                 {comments?.length} Comments
             </h2>
             <div className="flex flex-col mt-5 gap-5">
@@ -36,17 +36,13 @@ export default function CommentBlock({ item_id }: { item_id: number }) {
                     : comments?.map((comment) => {
                           return (
                               <div className="flex gap-3" key={comment.id}>
-                                  {comment.user.image_url ? (
-                                      <Avatar
-                                          src={comment.user.image_url}
-                                          variant="rounded"
-                                          className="w-10"
-                                      />
-                                  ) : (
-                                      <span className="rounded-lg border dark:border-white/30 border-black/30 px-3 h-10 text-sm flex items-center justify-center">
-                                          {`${comment.user.first_name.slice(0, 1)}${comment.user.last_name.slice(0, 1)}`}
-                                      </span>
-                                  )}
+                                  <Avatar
+                                      image_url={comment.user.image_url}
+                                      fullName={{
+                                          firstName: comment.user.first_name,
+                                          lastName: comment.user.last_name,
+                                      }}
+                                  />
                                   <div className="flex flex-col gap-1">
                                       <div className="font-semibold text-sm flex gap-1">
                                           <span>{comment.user.first_name}</span>
