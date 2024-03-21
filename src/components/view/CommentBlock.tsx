@@ -7,11 +7,12 @@ import CreateComment from "@/components/view/CreateComment";
 import getUserData from "@/utils/getUserData";
 import TUserData from "@/types/auth/TUserData";
 import Avatar from "@/components/view/Avatar";
-
+import { useTranslation } from "react-i18next";
 export default function CommentBlock({ item_id }: { item_id: number }) {
     const [userData, setUserData] = useState<TUserData | null>();
     const [loading, setLoading] = useState(true);
     const [comments, setComments] = useState<TCommentList[]>();
+    const { t } = useTranslation();
 
     useEffect(() => {
         setUserData(getUserData());
@@ -28,7 +29,7 @@ export default function CommentBlock({ item_id }: { item_id: number }) {
     return (
         <div className="max-w-[700px] mx-auto mt-5">
             <h2 className="text-2xl font-semibold text-center">
-                {comments?.length} Comments
+                {comments?.length} {t("comment")}
             </h2>
             <div className="flex flex-col mt-5 gap-5">
                 {loading

@@ -1,8 +1,13 @@
 import { Option, Select } from "@material-tailwind/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import reloadPage from "@/utils/reloadPage";
 
 export default function SelectLanguage() {
     const [activeLang, setActiveLang] = useState<string>("");
+
+    useEffect(() => {
+        setActiveLang(localStorage.getItem("i18nextLng")!);
+    });
 
     return (
         <Select
@@ -15,6 +20,10 @@ export default function SelectLanguage() {
             className="dark:text-white"
             labelProps={{
                 className: "dark:text-white",
+            }}
+            onChange={(value) => {
+                localStorage.setItem("i18nextLng", value!);
+                reloadPage();
             }}
         >
             <Option value="en">English</Option>
