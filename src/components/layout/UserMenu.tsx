@@ -1,6 +1,8 @@
 "use client";
 
 import {
+    Avatar,
+    Button,
     Menu,
     MenuHandler,
     MenuItem,
@@ -11,8 +13,6 @@ import { HiLogout } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import useAuth from "@/hooks/useAuth";
 import Link from "next/link";
-import { RiAdminLine } from "react-icons/ri";
-import Avatar from "@/components/view/Avatar";
 
 export default function UserMenu({ userData }: { userData: TUserData }) {
     const { logout } = useAuth();
@@ -20,13 +20,19 @@ export default function UserMenu({ userData }: { userData: TUserData }) {
     return (
         <Menu placement="bottom-end">
             <MenuHandler>
-                <Avatar
-                    image_url={userData.image_url}
-                    fullName={{
-                        firstName: userData.first_name,
-                        lastName: userData.last_name,
-                    }}
-                />
+                {userData.image_url ? (
+                    <Avatar
+                        variant="circular"
+                        className="cursor-pointer"
+                        size="sm"
+                        src={userData.image_url}
+                        alt={userData.first_name}
+                    />
+                ) : (
+                    <Button className="rounded-full border dark:border-white/30 border-black/30 dark:text-white text-black bg-transparent p-0 h-10 w-10 text-sm flex items-center justify-center">
+                        {`${userData.first_name.slice(0, 1)}${userData.last_name.slice(0, 1)}`}
+                    </Button>
+                )}
             </MenuHandler>
             <MenuList>
                 <div className="px-3 flex flex-col">
