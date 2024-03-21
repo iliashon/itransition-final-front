@@ -1,7 +1,6 @@
 import { WithContext, Tag } from "react-tag-input";
 import { useEffect, useState } from "react";
 import TagService from "@/services/tag.service";
-import { TiDeleteOutline } from "react-icons/ti";
 
 export default function InputTags({
     setTags,

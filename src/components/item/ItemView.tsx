@@ -8,6 +8,7 @@ import getUserData from "@/utils/getUserData";
 import CommentBlock from "@/components/view/CommentBlock";
 import ActionItems from "@/components/view/ActionItems";
 import TCollectionData from "@/types/collection/TCollectionData";
+import TagsView from "@/components/view/TagsView";
 
 export default function ItemView({
     item,
@@ -32,8 +33,13 @@ export default function ItemView({
                         className="h-full w-full object-cover object-center"
                     />
                 </div>
-                <div className="flex flex-col items-center justify-between gap-5">
-                    <h1 className="text-3xl font-semibold">{item.name}</h1>
+                <div className="flex flex-col justify-between gap-5">
+                    <div className="w-full">
+                        <h1 className="text-3xl text-center font-semibold mb-5">
+                            {item.name}
+                        </h1>
+                        <TagsView tags={item.tags} />
+                    </div>
                     <div className="flex w-full justify-between items-center">
                         <Like item_id={item.id} user_id={userData?.id} />
                         {(collection.user_id === userData?.id && (
