@@ -9,7 +9,10 @@ import TUserData from "@/types/user/TUserData";
 import UserService from "@/services/user.service";
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { Button } from "@material-tailwind/react";
-import { ActionUserTable } from "@/types/user/TActions";
+import TActions, { ActionUserTable } from "@/types/user/TActions";
+import { MdDelete } from "react-icons/md";
+import { RiAdminFill } from "react-icons/ri";
+import { TbLock } from "react-icons/tb";
 
 export default function UsersTable() {
     const [users, setUsers] = useState<TUserData[]>();
@@ -24,34 +27,40 @@ export default function UsersTable() {
         });
     };
 
+    const handleUpdate = async (
+        userIds: number[],
+        action: TActions,
+        value: boolean,
+    ) => {
+        await UserService.update(userIds, action, value).then(() => {
+            getUsers();
+        });
+    };
+
+    const handleDelete = async (usersIds: number[]) => {
+        await UserService.delete(usersIds).then(() => {
+            getUsers();
+        });
+    };
+
     const handleAction = async (action: ActionUserTable) => {
         setLoading(true);
         const usersIds = Object.keys(rowSelection).map((id) => Number(id));
         switch (action) {
             case ActionUserTable.ADMIN:
-                await UserService.update(usersIds, "admin", true).then(() => {
-                    getUsers();
-                });
+                await handleUpdate(usersIds, "admin", true);
                 break;
             case ActionUserTable.UNADMIN:
-                await UserService.update(usersIds, "admin", false).then(() => {
-                    getUsers();
-                });
+                await handleUpdate(usersIds, "admin", false);
                 break;
             case ActionUserTable.BLOCK:
-                await UserService.update(usersIds, "block", true).then(() => {
-                    getUsers();
-                });
+                await handleUpdate(usersIds, "block", true);
                 break;
             case ActionUserTable.UNBLOCK:
-                await UserService.update(usersIds, "block", false).then(() => {
-                    getUsers();
-                });
+                await handleUpdate(usersIds, "block", false);
                 break;
             case ActionUserTable.DELETE:
-                await UserService.delete(usersIds).then(() => {
-                    getUsers();
-                });
+                await handleDelete(usersIds);
                 break;
         }
         setRowSelection({});
@@ -134,44 +143,90 @@ export default function UsersTable() {
         enableFilters: false,
         enableColumnActions: false,
         enableHiding: false,
+        enableRowActions: true,
+        positionActionsColumn: undefined,
         renderTopToolbarCustomActions: ({ table }) => {
             return (
                 <div className="flex gap-3 flex-wrap mb-3 items-center">
-                    <Button
-                        onClick={() => handleAction(ActionUserTable.DELETE)}
-                        color="red"
-                        size="sm"
-                    >
-                        Delete
-                    </Button>
-                    <Button
-                        onClick={() => handleAction(ActionUserTable.BLOCK)}
-                        color="red"
-                        size="sm"
-                    >
-                        Block
-                    </Button>
-                    <Button
-                        onClick={() => handleAction(ActionUserTable.UNADMIN)}
-                        color="red"
-                        size="sm"
-                    >
-                        Unassign Admin
-                    </Button>
-                    <Button
-                        onClick={() => handleAction(ActionUserTable.UNBLOCK)}
-                        color="green"
-                        size="sm"
-                    >
-                        Unblock
-                    </Button>
-                    <Button
-                        onClick={() => handleAction(ActionUserTable.ADMIN)}
-                        color="green"
-                        size="sm"
-                    >
-                        Assign Admin
-                    </Button>
+                    {Object.keys(rowSelection).length > 0 && (
+                        <>
+                            <Button
+                                onClick={() =>
+                                    handleAction(ActionUserTable.DELETE)
+                                }
+                                color="red"
+                                size="sm"
+                            >
+                                Delete
+                            </Button>
+                            <Button
+                                onClick={() =>
+                                    handleAction(ActionUserTable.BLOCK)
+                                }
+                                color="red"
+                                size="sm"
+                            >
+                                Block
+                            </Button>
+                            <Button
+                                onClick={() =>
+                                    handleAction(ActionUserTable.UNADMIN)
+                                }
+                                color="red"
+                                size="sm"
+                            >
+                                Unassign Admin
+                            </Button>
+                            <Button
+                                onClick={() =>
+                                    handleAction(ActionUserTable.UNBLOCK)
+                                }
+                                color="green"
+                                size="sm"
+                            >
+                                Unblock
+                            </Button>
+                            <Button
+                                onClick={() =>
+                                    handleAction(ActionUserTable.ADMIN)
+                                }
+                                color="green"
+                                size="sm"
+                            >
+                                Assign Admin
+                            </Button>
+                        </>
+                    )}
+                </div>
+            );
+        },
+        renderRowActions: ({ row, table }) => {
+            return (
+                <div className="flex gap-3">
+                    <MdDelete
+                        className={`h-5 w-5 cursor-pointer text-red-500 opacity-50 hover:opacity-100`}
+                        onClick={() => handleDelete([row.original.id])}
+                    />
+                    <RiAdminFill
+                        className={`h-5 w-5 cursor-pointer opacity-50 hover:opacity-100 ${row.original.is_admin ? "text-red-500" : "text-green-500"}`}
+                        onClick={() =>
+                            handleUpdate(
+                                [row.original.id],
+                                "admin",
+                                !row.original.is_admin,
+                            )
+                        }
+                    />
+                    <TbLock
+                        className={`h-5 w-5 cursor-pointer opacity-50 hover:opacity-100 ${row.original.blocked ? "text-red-500" : "text-green-500"}`}
+                        onClick={() =>
+                            handleUpdate(
+                                [row.original.id],
+                                "block",
+                                !row.original.blocked,
+                            )
+                        }
+                    />
                 </div>
             );
         },
