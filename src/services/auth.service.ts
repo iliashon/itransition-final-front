@@ -11,7 +11,12 @@ class AuthService {
             {
                 ...data,
             },
-            { withCredentials: true },
+            {
+                withCredentials: true,
+                headers: {
+                    "Accept-Language": localStorage.getItem("i18nextLng"),
+                },
+            },
         );
     }
 
@@ -21,12 +26,25 @@ class AuthService {
             {
                 ...data,
             },
-            { withCredentials: true },
+            {
+                withCredentials: true,
+                headers: {
+                    "Accept-Language": localStorage.getItem("i18nextLng"),
+                },
+            },
         );
     }
 
     refresh() {
-        return api.post<TResponseAuth>("auth/refresh");
+        return api.post<TResponseAuth>(
+            "auth/refresh",
+            {},
+            {
+                headers: {
+                    "Accept-Language": localStorage.getItem("i18nextLng"),
+                },
+            },
+        );
     }
 
     logout() {

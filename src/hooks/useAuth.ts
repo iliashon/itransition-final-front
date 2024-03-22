@@ -77,8 +77,7 @@ export default function useAuth() {
                     reloadPage();
                 }
             } else {
-                clearLocalStorage();
-                reloadPage();
+                console.log(err);
             }
         } finally {
             setLoading(false);

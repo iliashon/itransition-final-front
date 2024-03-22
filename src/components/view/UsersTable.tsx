@@ -13,11 +13,15 @@ import TActions, { ActionUserTable } from "@/types/user/TActions";
 import { MdDelete } from "react-icons/md";
 import { RiAdminFill } from "react-icons/ri";
 import { TbLock } from "react-icons/tb";
+import useAuth from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
+import reloadPage from "@/utils/reloadPage";
 
-export default function UsersTable() {
+export default function UsersTable({ userData }: { userData: TUserData }) {
     const [users, setUsers] = useState<TUserData[]>();
     const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
     const [loading, setLoading] = useState(true);
+    const { refresh } = useAuth();
 
     const getUsers = () => {
         setLoading(true);
@@ -34,13 +38,17 @@ export default function UsersTable() {
     ) => {
         await UserService.update(userIds, action, value).then(() => {
             getUsers();
+            if (userIds.includes(userData.id) && action === "admin" && !value) {
+                reloadPage();
+            }
         });
     };
 
-    const handleDelete = async (usersIds: number[]) => {
-        await UserService.delete(usersIds).then(() => {
+    const handleDelete = async (userIds: number[]) => {
+        await UserService.delete(userIds).then(() => {
             getUsers();
         });
+        await refresh();
     };
 
     const handleAction = async (action: ActionUserTable) => {
