@@ -13,6 +13,7 @@ import { HiLogout } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import useAuth from "@/hooks/useAuth";
 import Link from "next/link";
+import { RiAdminFill } from "react-icons/ri";
 
 export default function UserMenu({ userData }: { userData: TUserData }) {
     const { logout } = useAuth();
@@ -40,6 +41,12 @@ export default function UserMenu({ userData }: { userData: TUserData }) {
                         {`${userData.first_name} ${userData.last_name}`}
                     </span>
                     <span className="text-[11px]">{userData.email}</span>
+                    {userData?.is_admin && (
+                        <span className="text-[12px] text-white bg-green-500 rounded-lg flex gap-1 items-center justify-center">
+                            Admin
+                            <RiAdminFill />
+                        </span>
+                    )}
                 </div>
                 <hr className="my-2" />
                 <MenuItem className="flex gap-3 items-center">

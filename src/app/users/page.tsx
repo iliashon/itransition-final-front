@@ -1,3 +1,5 @@
+import UsersView from "@/components/users/UsersView";
+
 export default function Users() {
-    return <div>Users board</div>;
+    return <UsersView />;
 }

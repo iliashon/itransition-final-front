@@ -7,8 +7,11 @@ import { IoClose } from "react-icons/io5";
 import Logo from "@/components/layout/Logo";
 import SwitchColorMode from "@/components/layout/SwitchColorMode";
 import SelectLanguage from "@/components/layout/SelectLanguage";
+import TUserData from "@/types/auth/TUserData";
+import Link from "next/link";
+import SearchByItems from "@/components/layout/SearchByItems";
 
-export default function DrawerMenu() {
+export default function DrawerMenu({ userData }: { userData?: TUserData }) {
     const [isOpenDrawer, setIsOpenDrawer] = useState(false);
 
     const handleOpenDrawer = () => {
@@ -40,7 +43,25 @@ export default function DrawerMenu() {
                         onClick={handleCloseDrawer}
                     />
                 </div>
-                <div></div>
+                <div className="h-full py-10 flex flex-col gap-4 text-xl">
+                    <SearchByItems className="w-full h-[36px] relative block lg:hidden" />
+                    <Link
+                        href="/collection"
+                        className="opacity-50 hover:opacity-100 duration-300"
+                        onClick={handleCloseDrawer}
+                    >
+                        Collections
+                    </Link>
+                    {userData?.is_admin && (
+                        <Link
+                            href="/users"
+                            className="opacity-50 hover:opacity-100 duration-300"
+                            onClick={handleCloseDrawer}
+                        >
+                            Users
+                        </Link>
+                    )}
+                </div>
                 <div className="flex flex-col gap-5 p-4 items-start">
                     <SelectLanguage />
                     <SwitchColorMode />

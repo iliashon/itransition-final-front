@@ -20,7 +20,7 @@ export default function Header() {
     return (
         <header className="h-[65px] px-4 border-b dark:border-b-white/30 border-black/30 flex items-center justify-between gap-3">
             <Logo />
-            <SearchByItems />
+            <SearchByItems className="w-1/3 h-[36px] relative hidden lg:block" />
             <div className="flex items-center gap-4">
                 {userData ? (
                     <>
@@ -32,7 +32,7 @@ export default function Header() {
                         <AuthModal />
                     </Suspense>
                 )}
-                <DrawerMenu />
+                <DrawerMenu userData={userData || undefined} />
             </div>
         </header>
     );

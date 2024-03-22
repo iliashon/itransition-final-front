@@ -6,10 +6,8 @@ import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CiSearch } from "react-icons/ci";
 
-export default function SearchByItems() {
-    const [isDarkMode, setIsDarkMode] = useState<boolean>();
+export default function SearchByItems({ className }: { className?: string }) {
     const [inputValue, setInputValue] = useState("");
-    const { theme } = useTheme();
     const router = useRouter();
 
     const handleSubmitSearch = (event: FormEvent) => {
@@ -20,15 +18,8 @@ export default function SearchByItems() {
         }
     };
 
-    useEffect(() => {
-        setIsDarkMode(localStorage.getItem("theme") === "dark");
-    }, [theme]);
-
     return (
-        <form
-            className="w-1/3 h-[36px] relative hidden lg:block"
-            onSubmit={handleSubmitSearch}
-        >
+        <form className={className} onSubmit={handleSubmitSearch}>
             <input
                 className="w-full h-full focus:outline-none focus:dark:border-white/70 focus:border-black/70 rounded-lg text-sm px-3 pr-8 bg-transparent border dark:border-white/30 border-black/30"
                 placeholder="Search..."
