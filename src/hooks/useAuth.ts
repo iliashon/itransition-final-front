@@ -6,12 +6,11 @@ import {
     setItemsLocalStorage,
     clearLocalStorage,
 } from "@/utils/localStorageAction";
-import { useRouter } from "next/navigation";
 import reloadPage from "@/utils/reloadPage";
+import { AxiosError } from "axios";
 
 export default function useAuth() {
     const [loading, setLoading] = useState(false);
-    const router = useRouter();
 
     async function login(data: TLogInForm) {
         setLoading(true);
@@ -24,7 +23,11 @@ export default function useAuth() {
             });
             reloadPage();
         } catch (err) {
-            console.log(err);
+            if (err instanceof AxiosError) {
+                return err.response?.data.message;
+            } else {
+                throw new Error("Something went wrong");
+            }
         } finally {
             setLoading(false);
         }
@@ -41,7 +44,11 @@ export default function useAuth() {
             });
             reloadPage();
         } catch (err) {
-            console.log(err);
+            if (err instanceof AxiosError) {
+                return err.response?.data.message;
+            } else {
+                throw new Error("Something went wrong");
+            }
         } finally {
             setLoading(false);
         }
@@ -57,9 +64,22 @@ export default function useAuth() {
                 token: userData.accessToken,
             });
         } catch (err) {
-            console.log(err);
-            clearLocalStorage();
-            reloadPage();
+            if (err instanceof AxiosError) {
+                if (
+                    err.response?.status === 403 ||
+                    err.response?.status === 401
+                ) {
+                    clearLocalStorage();
+                    localStorage.setItem(
+                        "authError",
+                        err.response.data.message,
+                    );
+                    reloadPage();
+                }
+            } else {
+                clearLocalStorage();
+                reloadPage();
+            }
         } finally {
             setLoading(false);
         }

@@ -16,7 +16,7 @@ const style = {
 
 export default function SignUpForm() {
     const [isHiddenPass, setIsHiddenPass] = useState(true);
-
+    const [error, setError] = useState<string>();
     const { register: registration, loading } = useAuth();
 
     const {
@@ -26,8 +26,11 @@ export default function SignUpForm() {
     } = useForm<TSignInForm>();
 
     const onSubmitForm: SubmitHandler<TSignInForm> = async (data) => {
-        console.log(data);
-        await registration(data);
+        await registration(data).then((res) => {
+            if (typeof res === "string") {
+                setError(res);
+            }
+        });
     };
 
     const handleShowPass = () => {
@@ -39,6 +42,11 @@ export default function SignUpForm() {
             className="flex flex-col gap-5 relative"
             onSubmit={handleSubmit(onSubmitForm)}
         >
+            {error && (
+                <Alert color="red" className="py-3">
+                    {error}
+                </Alert>
+            )}
             <input
                 type="text"
                 placeholder="First name"

@@ -17,6 +17,7 @@ const style = {
 
 export default function LogInForm() {
     const [isHiddenPass, setIsHiddenPass] = useState(true);
+    const [error, setError] = useState<string>();
     const {
         register,
         handleSubmit,
@@ -25,7 +26,11 @@ export default function LogInForm() {
     const { login, loading } = useAuth();
 
     const onSubmitForm: SubmitHandler<TLogInForm> = async (data) => {
-        await login(data);
+        await login(data).then((res) => {
+            if (typeof res === "string") {
+                setError(res);
+            }
+        });
     };
 
     const handleShowPass = () => {
@@ -38,6 +43,11 @@ export default function LogInForm() {
             className="flex flex-col justify-between h-full relative"
         >
             <div className="flex flex-col gap-7">
+                {error && (
+                    <Alert color="red" className="py-3">
+                        {error}
+                    </Alert>
+                )}
                 <div>
                     <input
                         type="text"
