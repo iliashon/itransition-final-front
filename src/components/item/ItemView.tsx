@@ -3,7 +3,7 @@
 import Like from "@/components/view/Like";
 import TItemData from "@/types/item/TItemData";
 import { useEffect, useState } from "react";
-import TUserData from "@/types/auth/TUserData";
+import TUserData from "@/types/user/TUserData";
 import getUserData from "@/utils/getUserData";
 import CommentBlock from "@/components/view/CommentBlock";
 import ActionItems from "@/components/view/ActionItems";

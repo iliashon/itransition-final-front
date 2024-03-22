@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 import Logo from "@/components/layout/Logo";
 import SwitchColorMode from "@/components/layout/SwitchColorMode";
 import SelectLanguage from "@/components/layout/SelectLanguage";
-import TUserData from "@/types/auth/TUserData";
+import TUserData from "@/types/user/TUserData";
 import Link from "next/link";
 import SearchByItems from "@/components/layout/SearchByItems";
 

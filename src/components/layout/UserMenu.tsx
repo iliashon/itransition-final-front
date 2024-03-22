@@ -8,7 +8,7 @@ import {
     MenuItem,
     MenuList,
 } from "@material-tailwind/react";
-import TUserData from "@/types/auth/TUserData";
+import TUserData from "@/types/user/TUserData";
 import { HiLogout } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import useAuth from "@/hooks/useAuth";

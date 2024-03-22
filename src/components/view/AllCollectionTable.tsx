@@ -11,7 +11,7 @@ import TCollectionData from "@/types/collection/TCollectionData";
 import Link from "next/link";
 import { MdOpenInNew } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import TUserData from "@/types/auth/TUserData";
+import TUserData from "@/types/user/TUserData";
 import getUserData from "@/utils/getUserData";
 import CollectionService from "@/services/collection.service";
 

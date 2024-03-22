@@ -7,7 +7,7 @@ import TItemData from "@/types/item/TItemData";
 import MarkdownEditor from "@uiw/react-markdown-editor";
 import ActionCollection from "@/components/view/ActionCollection";
 import { useEffect, useState } from "react";
-import TUserData from "@/types/auth/TUserData";
+import TUserData from "@/types/user/TUserData";
 import getUserData from "@/utils/getUserData";
 
 export default function CollectionView({

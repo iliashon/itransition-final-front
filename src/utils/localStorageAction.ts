@@ -1,4 +1,4 @@
-import TUserData from "@/types/auth/TUserData";
+import TUserData from "@/types/user/TUserData";
 
 export function clearLocalStorage() {
     localStorage.removeItem("userData");

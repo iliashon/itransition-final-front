@@ -1,4 +1,4 @@
-import TUserData from "@/types/auth/TUserData";
+import TUserData from "@/types/user/TUserData";
 
 type TResponseAuth = {
     accessToken: string;

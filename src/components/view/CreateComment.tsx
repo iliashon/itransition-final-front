@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import TUserData from "@/types/auth/TUserData";
+import TUserData from "@/types/user/TUserData";
 import TCommentList from "@/types/comment/TCommentList";
 import CommentService from "@/services/comment.service";
 import { ClipLoader } from "react-spinners";

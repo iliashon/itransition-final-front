@@ -5,7 +5,7 @@ import TCommentList from "@/types/comment/TCommentList";
 import CommentService from "@/services/comment.service";
 import CreateComment from "@/components/view/CreateComment";
 import getUserData from "@/utils/getUserData";
-import TUserData from "@/types/auth/TUserData";
+import TUserData from "@/types/user/TUserData";
 import Avatar from "@/components/view/Avatar";
 import { useTranslation } from "react-i18next";
 

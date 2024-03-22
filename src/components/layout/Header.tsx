@@ -5,7 +5,7 @@ import DrawerMenu from "@/components/layout/DrawerMenu";
 import AuthModal from "@/components/auth/AuthModal";
 import { Suspense, useEffect, useState } from "react";
 import Logo from "@/components/layout/Logo";
-import TUserData from "@/types/auth/TUserData";
+import TUserData from "@/types/user/TUserData";
 import getUserData from "@/utils/getUserData";
 import UserMenu from "@/components/layout/UserMenu";
 import LinkCreateCollection from "@/components/layout/LinkCreateCollection";
