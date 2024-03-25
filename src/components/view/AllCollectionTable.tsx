@@ -9,7 +9,6 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import TCollectionData from "@/types/collection/TCollectionData";
 import Link from "next/link";
-import { MdDelete, MdEdit } from "react-icons/md";
 import TUserData from "@/types/user/TUserData";
 import getUserData from "@/utils/getUserData";
 import CollectionService from "@/services/collection.service";

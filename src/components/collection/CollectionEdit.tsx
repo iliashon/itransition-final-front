@@ -10,6 +10,7 @@ import SelectCollectionType from "@/components/edit/SelectCollectionType";
 import { Button } from "@material-tailwind/react";
 import MarkdownEditor from "@uiw/react-markdown-editor";
 import BackButton from "@/components/view/BackButton";
+import CreateAttributes from "@/components/edit/CreateAttributes";
 
 export default function CollectionEdit({ data }: { data?: TCollectionData }) {
     const router = useRouter();
@@ -19,6 +20,7 @@ export default function CollectionEdit({ data }: { data?: TCollectionData }) {
         description: data?.description || "# New Collection",
         type: data?.type || "",
         image_url: data?.image_url || "",
+        attributes: [],
     });
 
     const handleType = (value: string) => {
@@ -97,7 +99,7 @@ export default function CollectionEdit({ data }: { data?: TCollectionData }) {
                             value={state.type}
                             setValue={handleType}
                         />
-                        <div className="border dark:border-white border-black/30 rounded h-64"></div>
+                        <CreateAttributes state={state} setState={setState} />
                     </div>
                     <Button
                         loading={loading}
