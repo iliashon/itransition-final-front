@@ -6,7 +6,7 @@ export default function LastItems({ data }: { data: TItemData[] }) {
         <section className="px-10 pt-10 grid grid-cols-5 gap-5">
             {data.map((item) => {
                 return (
-                    <article className="">
+                    <article key={item.id}>
                         <div className="h-48 w-full overflow-hidden rounded-lg bg-white">
                             <img
                                 src={item.image_url || "/imageNotFound.jpeg"}

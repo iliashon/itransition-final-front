@@ -12,7 +12,7 @@ export default function TopFiveCollection({
         <section className="px-10 pt-10 grid grid-cols-5 gap-5">
             {data.map((collection) => {
                 return (
-                    <article className="">
+                    <article key={collection.id}>
                         <div className="h-48 w-full overflow-hidden rounded-lg bg-white">
                             <img
                                 src={
