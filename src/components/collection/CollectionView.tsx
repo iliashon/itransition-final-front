@@ -57,13 +57,13 @@ export default function CollectionView({
                 </div>
             </div>
             <hr />
-            <ItemTable data={items} />
-            <Link
-                href={`/item/create/${collection.id}`}
-                className="bg-gray-600 py-2 justify-center rounded-full text-white flex"
-            >
-                Create Item
-            </Link>
+            <ItemTable
+                data={items}
+                editAction={
+                    collection.id === userData?.id || !!userData?.is_admin
+                }
+                collection_id={collection.id}
+            />
         </main>
     );
 }

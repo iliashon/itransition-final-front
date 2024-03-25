@@ -152,7 +152,6 @@ export default function UsersTable({ userData }: { userData: TUserData }) {
         enableColumnActions: false,
         enableHiding: false,
         enableRowActions: true,
-        positionActionsColumn: undefined,
         renderTopToolbarCustomActions: ({ table }) => {
             return (
                 <div className="flex gap-3 flex-wrap mb-3 items-center">

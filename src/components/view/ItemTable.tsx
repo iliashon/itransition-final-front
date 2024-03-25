@@ -10,23 +10,30 @@ import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MdOpenInNew } from "react-icons/md";
+import { Button } from "@material-tailwind/react";
 
-export default function ItemTable({ data = [] }: { data?: TItemData[] }) {
+export default function ItemTable({
+    data = [],
+    editAction,
+    collection_id,
+}: {
+    data?: TItemData[];
+    editAction: boolean;
+    collection_id: number;
+}) {
     const columns = useMemo<MRT_ColumnDef<TItemData>[]>(
         () => [
             {
-                accessorKey: "id",
-                header: "Link",
-                size: 30,
-                Cell: (props) => (
-                    <Link href={`/item/${props.row.original.id}`}>
-                        <MdOpenInNew className="h-5 w-5 text-black" />
-                    </Link>
-                ),
-            },
-            {
                 accessorKey: "name",
                 header: "Name",
+                Cell: (props) => (
+                    <Link
+                        href={`/item/${props.row.original.id}`}
+                        className="cursor-alias"
+                    >
+                        {props.row.original.name}
+                    </Link>
+                ),
             },
             {
                 accessorKey: "image_url",
@@ -51,6 +58,18 @@ export default function ItemTable({ data = [] }: { data?: TItemData[] }) {
         columns,
         data,
         enablePagination: true,
+        renderTopToolbarCustomActions: (props) => {
+            return (
+                editAction && (
+                    <Link
+                        href={`/item/create/${collection_id}`}
+                        className="bg-gray-600 py-2 rounded-lg text-sm px-4 text-white"
+                    >
+                        Create Item
+                    </Link>
+                )
+            );
+        },
     });
 
     return <MaterialReactTable table={table} />;
