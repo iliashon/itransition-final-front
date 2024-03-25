@@ -16,10 +16,13 @@ export default function DrawerMenu({ userData }: { userData?: TUserData }) {
 
     const handleOpenDrawer = () => {
         setIsOpenDrawer(true);
+        document.body.style.overflow = "hidden";
+        window.scroll(0, 0);
     };
 
     const handleCloseDrawer = () => {
         setIsOpenDrawer(false);
+        document.body.style.overflow = "auto";
     };
 
     return (
