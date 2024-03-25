@@ -5,6 +5,7 @@ type TItemData = {
     name: string;
     image_url: string;
     collection_id: number;
+    created_at: string;
     tags: Tag[];
 };
 

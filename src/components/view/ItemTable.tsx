@@ -50,6 +50,12 @@ export default function ItemTable({
                     />
                 ),
             },
+            {
+                accessorKey: "created_at",
+                header: "Created time",
+                Cell: (props) =>
+                    new Date(props.row.original.created_at).toLocaleString(),
+            },
         ],
         [],
     );

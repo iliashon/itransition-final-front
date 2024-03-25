@@ -10,6 +10,7 @@ type TCollectionData = {
     description: string;
     type: string;
     image_url: string;
+    created_at: string;
     _count: {
         item: number;
     };

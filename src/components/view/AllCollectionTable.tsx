@@ -71,6 +71,12 @@ export default function AllCollectionTable() {
                 accessorKey: "type",
                 header: "Type",
             },
+            {
+                accessorKey: "created_at",
+                header: "Create time",
+                Cell: (props) =>
+                    new Date(props.row.original.created_at).toLocaleString(),
+            },
         ],
         [],
     );
