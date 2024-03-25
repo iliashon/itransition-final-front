@@ -22,6 +22,9 @@ export default function SwitchColorMode() {
     };
 
     useEffect(() => {
+        if (!localStorage.getItem("theme")) {
+            localStorage.setItem("theme", DARK_MODE);
+        }
         const mode = localStorage.getItem("theme");
         setIsDarkMode(mode === DARK_MODE);
         document.documentElement.setAttribute(

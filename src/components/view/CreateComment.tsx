@@ -2,7 +2,6 @@ import { FormEvent, useState } from "react";
 import TUserData from "@/types/user/TUserData";
 import TCommentList from "@/types/comment/TCommentList";
 import CommentService from "@/services/comment.service";
-import { ClipLoader } from "react-spinners";
 import Avatar from "@/components/view/Avatar";
 
 export default function CreateComment({
@@ -15,18 +14,15 @@ export default function CreateComment({
     item_id: number;
 }) {
     const [text, setText] = useState("");
-    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setLoading(true);
         const newComment = await CommentService.create({
             text,
             item_id,
         }).then((res) => res.data);
         handleCreate(newComment);
         setText("");
-        setLoading(false);
     };
 
     return (
@@ -53,11 +49,6 @@ export default function CreateComment({
                     Send
                 </button>
             </div>
-            {loading && (
-                <div className="absolute left-0 top-0 w-full h-full bg-black/30 rounded-lg flex justify-center items-center">
-                    <ClipLoader />
-                </div>
-            )}
         </form>
     );
 }

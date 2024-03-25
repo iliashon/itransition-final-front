@@ -11,7 +11,7 @@ export default function TagsView({ tags }: { tags: Tag[] }) {
                         href={`?tag=${tag.text}`}
                         className="border dark:border-white/50 border-black/50 rounded-lg px-2"
                     >
-                        #{tag.text}
+                        {tag.text}
                     </Link>
                 );
             })}
