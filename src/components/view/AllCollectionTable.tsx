@@ -9,11 +9,11 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import TCollectionData from "@/types/collection/TCollectionData";
 import Link from "next/link";
-import { MdOpenInNew } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+import { MdDelete, MdEdit } from "react-icons/md";
 import TUserData from "@/types/user/TUserData";
 import getUserData from "@/utils/getUserData";
 import CollectionService from "@/services/collection.service";
+import ActionCollection from "@/components/view/ActionCollection";
 
 export default function AllCollectionTable() {
     const [userData, setUserData] = useState<TUserData | null>();
@@ -31,12 +31,15 @@ export default function AllCollectionTable() {
     const columns = useMemo<MRT_ColumnDef<TCollectionData>[]>(
         () => [
             {
-                accessorKey: "id",
-                header: "Link",
-                size: 50,
+                accessorKey: "name",
+                header: "Name",
+                size: 70,
                 Cell: (props) => (
-                    <Link href={`/collection/${props.row.original.id}`}>
-                        <MdOpenInNew className="h-5 w-5 text-black" />
+                    <Link
+                        href={`/collection/${props.row.original.id}`}
+                        className="cursor-alias"
+                    >
+                        {props.row.original.name}
                     </Link>
                 ),
             },
@@ -54,10 +57,6 @@ export default function AllCollectionTable() {
                 ),
             },
             {
-                accessorKey: "name",
-                header: "Name",
-            },
-            {
                 accessorKey: "type",
                 header: "Type",
             },
@@ -72,16 +71,17 @@ export default function AllCollectionTable() {
             isLoading: loading,
         },
         muiTableContainerProps: {
-            sx: { height: "600px" },
+            sx: { height: "calc(100vh - 290px)" },
         },
+        enableDensityToggle: false,
+        enableColumnFilters: false,
+        enableFilters: false,
+        enableColumnActions: false,
+        enableHiding: false,
         enableRowActions: !!userData,
         renderRowActions: ({ row }) => {
             if (userData?.id === row.original.user_id || userData?.is_admin) {
-                return (
-                    <Link href={`/collection/edit/${row.original.id}`}>
-                        <FaEdit className="h-5 w-5" />
-                    </Link>
-                );
+                return <ActionCollection collection={row.original} />;
             }
         },
     });
