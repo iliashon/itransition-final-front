@@ -30,12 +30,16 @@ export default function CollectionView({
             <div className="grid xl:grid-cols-2 grid-cols-1 items-center gap-5">
                 <div className="flex flex-col gap-5">
                     <div className="flex justify-between">
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-2">
                             <h1 className="text-5xl font-semibold">
                                 {collection.name}
                             </h1>
                             <h2 className="text-sm text-gray-500 underline hover:text-gray-700 cursor-default duration-300">
                                 Type: {collection.type}
+                            </h2>
+                            <h2 className="text-sm text-gray-500 underline hover:text-gray-700 cursor-default duration-300">
+                                Author:{" "}
+                                {`${collection.user.first_name} ${collection.user.last_name}`}
                             </h2>
                         </div>
                         {(collection.user_id === userData?.id && (

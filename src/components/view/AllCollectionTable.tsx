@@ -57,6 +57,17 @@ export default function AllCollectionTable() {
                 ),
             },
             {
+                accessorKey: "user",
+                header: "Author",
+                Cell: (props) =>
+                    `${props.row.original.user.first_name} ${props.row.original.user.last_name}`,
+            },
+            {
+                accessorKey: "_count.item",
+                header: "Count item",
+                Cell: (props) => `${props.row.original._count.item}`,
+            },
+            {
                 accessorKey: "type",
                 header: "Type",
             },
