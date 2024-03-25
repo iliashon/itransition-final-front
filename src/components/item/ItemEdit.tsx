@@ -9,6 +9,7 @@ import ItemService from "@/services/item.service";
 import InputTags from "@/components/edit/InputTags";
 import UploadImage from "@/components/edit/UploadImage";
 import { Button } from "@material-tailwind/react";
+import BackButton from "@/components/view/BackButton";
 
 export default function ItemEdit({
     collection_id,
@@ -60,9 +61,12 @@ export default function ItemEdit({
 
     return (
         <main className="px-4">
-            <h1 className="text-3xl font-bold py-7">
-                {data ? "Edit item" : "Create item"}
-            </h1>
+            <div className="flex justify-between items-center">
+                <h1 className="text-3xl font-bold py-7">
+                    {data ? "Edit item" : "Create item"}
+                </h1>
+                <BackButton />
+            </div>
             <section className="relative grid lg:grid-cols-3 grid-cols-1 gap-5">
                 <div className="flex flex-col gap-5 lg:col-span-2 col-auto">
                     <input

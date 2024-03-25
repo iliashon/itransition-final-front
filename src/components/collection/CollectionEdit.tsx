@@ -9,6 +9,7 @@ import UploadImage from "@/components/edit/UploadImage";
 import SelectCollectionType from "@/components/edit/SelectCollectionType";
 import { Button } from "@material-tailwind/react";
 import MarkdownEditor from "@uiw/react-markdown-editor";
+import BackButton from "@/components/view/BackButton";
 
 export default function CollectionEdit({ data }: { data?: TCollectionData }) {
     const router = useRouter();
@@ -58,9 +59,12 @@ export default function CollectionEdit({ data }: { data?: TCollectionData }) {
 
     return (
         <main className="px-4">
-            <h1 className="text-3xl font-bold py-7">
-                {data ? "Edit collection" : "Create collection"}
-            </h1>
+            <div className="flex justify-between items-center">
+                <h1 className="text-3xl font-bold py-7">
+                    {data ? "Edit collection" : "Create collection"}
+                </h1>
+                <BackButton />
+            </div>
             <section className="relative grid lg:grid-cols-3 grid-cols-1 gap-5">
                 <div className="flex flex-col gap-5 lg:col-span-2 col-auto">
                     <input

@@ -9,6 +9,7 @@ import ActionCollection from "@/components/view/ActionCollection";
 import { useEffect, useState } from "react";
 import TUserData from "@/types/user/TUserData";
 import getUserData from "@/utils/getUserData";
+import BackButton from "@/components/view/BackButton";
 
 export default function CollectionView({
     collection,
@@ -25,6 +26,7 @@ export default function CollectionView({
 
     return (
         <main className="lg:px-14 px-4 mt-10 mb-5 flex flex-col gap-5">
+            <BackButton />
             <div className="grid xl:grid-cols-2 grid-cols-1 items-center gap-5">
                 <div className="flex flex-col gap-5">
                     <div className="flex justify-between">

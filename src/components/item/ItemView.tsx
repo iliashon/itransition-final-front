@@ -9,6 +9,7 @@ import CommentBlock from "@/components/view/CommentBlock";
 import ActionItems from "@/components/view/ActionItems";
 import TCollectionData from "@/types/collection/TCollectionData";
 import TagsView from "@/components/view/TagsView";
+import BackButton from "@/components/view/BackButton";
 
 export default function ItemView({
     item,
@@ -24,7 +25,10 @@ export default function ItemView({
     }, []);
 
     return (
-        <main className="mt-10 px-4 max-w-[1320px] mx-auto">
+        <main className="mt-5 px-4 max-w-[1320px] mx-auto">
+            <div className="mb-5">
+                <BackButton />
+            </div>
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mb-5">
                 <div className="relative h-[500px] w-full overflow-hidden rounded-2xl bg-white border">
                     <img
