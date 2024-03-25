@@ -6,6 +6,7 @@ import { TagCloud } from "react-tagcloud";
 import TopFiveCollection from "@/components/view/TopFiveCollection";
 import TCollectionData from "@/types/collection/TCollectionData";
 import TItemData from "@/types/item/TItemData";
+import LastItems from "@/components/view/LastItems";
 
 export default function HomeView({
     tagsCloud,
@@ -60,6 +61,10 @@ export default function HomeView({
             </h2>
             <TopFiveCollection data={topCollection} />
             <hr className="my-10" />
+            <h2 className="font-bold text-3xl text-center">
+                Latest created items
+            </h2>
+            <LastItems data={lastItems} />
         </main>
     );
 }
