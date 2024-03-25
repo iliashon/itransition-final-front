@@ -27,6 +27,10 @@ class ItemService {
     delete(id: number) {
         return api.delete(`${API_HOST}/item/${id}`);
     }
+
+    getLastItems() {
+        return axios.get<TItemData[]>(`${API_HOST}/item/last`);
+    }
 }
 
 export default new ItemService();

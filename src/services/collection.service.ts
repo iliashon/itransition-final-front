@@ -32,6 +32,10 @@ class CollectionService {
     delete(id: number) {
         return api.delete(`${API_HOST}/collection/${id}`);
     }
+
+    getTop() {
+        return axios.get<TCollectionData[]>(`${API_HOST}/collection/top`);
+    }
 }
 
 export default new CollectionService();

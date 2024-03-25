@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import ItemTable from "@/components/view/ItemTable";
 import TCollectionData from "@/types/collection/TCollectionData";
 import TItemData from "@/types/item/TItemData";

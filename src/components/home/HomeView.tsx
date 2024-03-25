@@ -3,8 +3,19 @@
 import Link from "next/link";
 import TTagsCloud from "@/types/tag/TTagsCloud";
 import { TagCloud } from "react-tagcloud";
+import TopFiveCollection from "@/components/view/TopFiveCollection";
+import TCollectionData from "@/types/collection/TCollectionData";
+import TItemData from "@/types/item/TItemData";
 
-export default function HomeView({ tagsCloud }: { tagsCloud: TTagsCloud[] }) {
+export default function HomeView({
+    tagsCloud,
+    topCollection,
+    lastItems,
+}: {
+    tagsCloud: TTagsCloud[];
+    topCollection: TCollectionData[];
+    lastItems: TItemData[];
+}) {
     return (
         <main className="px-4 mt-10 sm:mt-20">
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:px-10">
@@ -43,6 +54,12 @@ export default function HomeView({ tagsCloud }: { tagsCloud: TTagsCloud[] }) {
                     colorOptions={{ luminosity: "light", hue: "monochrome" }}
                 />
             </section>
+            <hr className="my-10" />
+            <h2 className="font-bold text-3xl text-center">
+                Top 5 collections
+            </h2>
+            <TopFiveCollection data={topCollection} />
+            <hr className="my-10" />
         </main>
     );
 }
