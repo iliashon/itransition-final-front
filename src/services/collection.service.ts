@@ -36,6 +36,10 @@ class CollectionService {
     getTop() {
         return axios.get<TCollectionData[]>(`${API_HOST}/collection/top`);
     }
+
+    getUserCollections() {
+        return api.get(`${API_HOST}/collection/user`);
+    }
 }
 
 export default new CollectionService();

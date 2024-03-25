@@ -49,7 +49,10 @@ export default function AllCollectionTable() {
                 size: 100,
                 Cell: (props) => (
                     <Image
-                        src={props.row.original.image_url}
+                        src={
+                            props.row.original.image_url ||
+                            "/imageNotFound.jpeg"
+                        }
                         alt="Image"
                         width={50}
                         height={50}
