@@ -67,7 +67,7 @@ export default function CollectionView({
                 editAction={
                     collection.id === userData?.id || !!userData?.is_admin
                 }
-                collection_id={collection.id}
+                collection={collection}
             />
         </main>
     );

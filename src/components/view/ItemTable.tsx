@@ -6,21 +6,32 @@ import {
     useMaterialReactTable,
 } from "material-react-table";
 import TItemData from "@/types/item/TItemData";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MdOpenInNew } from "react-icons/md";
 import { Button } from "@material-tailwind/react";
+import ActionItem from "@/components/view/ActionItem";
+import TUserData from "@/types/user/TUserData";
+import TCollectionData from "@/types/collection/TCollectionData";
+import getUserData from "@/utils/getUserData";
+import CollectionService from "@/services/collection.service";
 
 export default function ItemTable({
     data = [],
     editAction,
-    collection_id,
+    collection,
 }: {
     data?: TItemData[];
     editAction: boolean;
-    collection_id: number;
+    collection: TCollectionData;
 }) {
+    const [userData, setUserData] = useState<TUserData | null>();
+
+    useEffect(() => {
+        setUserData(getUserData());
+    }, []);
+
     const columns = useMemo<MRT_ColumnDef<TItemData>[]>(
         () => [
             {
@@ -29,7 +40,7 @@ export default function ItemTable({
                 Cell: (props) => (
                     <Link
                         href={`/item/${props.row.original.id}`}
-                        className="cursor-alias"
+                        className="cursor-pointer"
                     >
                         {props.row.original.name}
                     </Link>
@@ -64,11 +75,17 @@ export default function ItemTable({
         columns,
         data,
         enablePagination: true,
+        enableRowActions: !!userData,
+        renderRowActions: ({ row }) => {
+            if (userData?.id === collection.user_id || userData?.is_admin) {
+            }
+            return <ActionItem item={row.original} />;
+        },
         renderTopToolbarCustomActions: (props) => {
             return (
                 editAction && (
                     <Link
-                        href={`/item/create/${collection_id}`}
+                        href={`/item/create/${collection.id}`}
                         className="bg-gray-600 py-2 rounded-lg text-sm px-4 text-white"
                     >
                         Create Item

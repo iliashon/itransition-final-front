@@ -36,7 +36,7 @@ export default function AllCollectionTable() {
                 Cell: (props) => (
                     <Link
                         href={`/collection/${props.row.original.id}`}
-                        className="cursor-alias"
+                        className="cursor-pointer"
                     >
                         {props.row.original.name}
                     </Link>

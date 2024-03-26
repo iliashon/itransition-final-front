@@ -106,6 +106,7 @@ export default function CreateAttributes({
                                     <input
                                         type="text"
                                         placeholder="Name"
+                                        autoFocus
                                         className="h-full focus:outline-none px-3 border-b dark:border-b-white/30 border-b-black/30 bg-transparent"
                                         value={atr.name}
                                         onChange={(event) => {
