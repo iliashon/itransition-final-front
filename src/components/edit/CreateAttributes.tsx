@@ -98,6 +98,7 @@ export default function CreateAttributes({
                     {state.attributes.map((atr, index) => {
                         return (
                             <ListItem
+                                key={atr.name}
                                 className="flex flex-col gap-3 !overflow-visible"
                                 ripple={false}
                             >

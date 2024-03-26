@@ -14,7 +14,7 @@ export default async function CreateItemPage({
         if (collection === null) {
             notFound();
         }
-        return <ItemEdit collection_id={Number(params.collection_id)} />;
+        return <ItemEdit collection={collection} />;
     } else {
         notFound();
     }

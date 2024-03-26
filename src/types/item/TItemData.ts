@@ -1,4 +1,5 @@
 import { Tag } from "react-tag-input";
+import TReadAttributes from "@/types/item/TReadAttributes";
 
 type TItemData = {
     id: number;
@@ -7,6 +8,7 @@ type TItemData = {
     collection_id: number;
     created_at: string;
     tags: Tag[];
+    attributes: TReadAttributes[];
 };
 
 export default TItemData;

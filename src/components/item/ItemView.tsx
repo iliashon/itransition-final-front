@@ -10,6 +10,7 @@ import ActionItems from "@/components/view/ActionItems";
 import TCollectionData from "@/types/collection/TCollectionData";
 import TagsView from "@/components/view/TagsView";
 import BackButton from "@/components/view/BackButton";
+import AttributesView from "@/components/view/AttributesView";
 
 export default function ItemView({
     item,
@@ -44,6 +45,7 @@ export default function ItemView({
                         </h1>
                         <TagsView tags={item.tags} />
                     </div>
+                    <AttributesView attributes={item.attributes} />
                     <div className="flex w-full justify-between items-center">
                         <Like item_id={item.id} user_id={userData?.id} />
                         {(collection.user_id === userData?.id && (

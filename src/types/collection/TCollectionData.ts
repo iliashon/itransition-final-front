@@ -1,3 +1,5 @@
+import TAttributeData from "@/types/collection/TAttributeData";
+
 type TCollectionData = {
     id: number;
     user_id: number;
@@ -6,6 +8,7 @@ type TCollectionData = {
         last_name: string;
         email: string;
     };
+    attribute: TAttributeData[];
     name: string;
     description: string;
     type: string;

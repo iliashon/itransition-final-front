@@ -1,11 +1,13 @@
-import TAttributeData from "@/types/collection/TAttributeData";
+import TAttributeData, {
+    TCreateAttributeData,
+} from "@/types/collection/TAttributeData";
 
 type TCreateCollectionData = {
     name: string;
     description: string;
     type: string;
     image_url: string;
-    attributes: TAttributeData[];
+    attributes: TCreateAttributeData[];
 };
 
 export default TCreateCollectionData;

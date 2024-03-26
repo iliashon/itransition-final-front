@@ -10,33 +10,43 @@ import InputTags from "@/components/edit/InputTags";
 import UploadImage from "@/components/edit/UploadImage";
 import { Button } from "@material-tailwind/react";
 import BackButton from "@/components/view/BackButton";
+import TCollectionData from "@/types/collection/TCollectionData";
+import AttributeInputs from "@/components/edit/AttributeInputs";
 
 export default function ItemEdit({
-    collection_id,
+    collection,
     data,
 }: {
-    collection_id: number;
+    collection: TCollectionData;
     data?: TItemData;
 }) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [stateCreateItem, setStateCreateItem] = useState<TCreateItemData>({
+    const [state, setState] = useState<TCreateItemData>({
         name: data?.name || "",
         image_url: data?.image_url || null,
-        collection_id: collection_id,
+        collection_id: collection.id,
         tags: [],
+        attributes: collection.attribute.map((atr) => {
+            return {
+                value: "",
+                atr_id: atr.id,
+                type: atr.type,
+                name: atr.name,
+            };
+        }),
     });
 
     const handleImage = (value: string) => {
-        setStateCreateItem({
-            ...stateCreateItem,
+        setState({
+            ...state,
             image_url: value,
         });
     };
 
     const handleTags = (value: Tag[]) => {
-        setStateCreateItem({
-            ...stateCreateItem,
+        setState({
+            ...state,
             tags: value,
         });
     };
@@ -46,13 +56,13 @@ export default function ItemEdit({
         if (data) {
             const item = await ItemService.update(
                 {
-                    ...stateCreateItem,
+                    ...state,
                 },
                 Number(data?.id),
             ).then((res) => router.push(`/item/${res.data.id}`));
         } else {
             const item = await ItemService.create({
-                ...stateCreateItem,
+                ...state,
             }).then((res) => router.push(`/item/${res.data.id}`));
         }
         setLoading(false);
@@ -73,19 +83,20 @@ export default function ItemEdit({
                         type="text"
                         className="border dark:border-white border-black/30 bg-transparent rounded w-full h-12 px-3 text-xl focus:outline-none"
                         placeholder="Title"
-                        value={stateCreateItem.name}
+                        value={state.name}
                         onChange={(event) =>
-                            setStateCreateItem({
-                                ...stateCreateItem,
+                            setState({
+                                ...state,
                                 name: event.target.value,
                             })
                         }
                     />
                     <InputTags setTags={handleTags} tags={data?.tags} />
+                    <AttributeInputs state={state} setState={setState} />
                 </div>
                 <div className="flex flex-col justify-between gap-5">
                     <UploadImage
-                        value={stateCreateItem.image_url}
+                        value={state.image_url}
                         setValue={handleImage}
                         folder_name="item"
                     />
