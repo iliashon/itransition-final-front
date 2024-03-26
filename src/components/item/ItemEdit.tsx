@@ -1,7 +1,7 @@
 "use client";
 
 import TItemData from "@/types/item/TItemData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import TCreateItemData from "@/types/item/TCreateItemData";
 import { Tag } from "react-tag-input";
@@ -12,6 +12,9 @@ import { Button } from "@material-tailwind/react";
 import BackButton from "@/components/view/BackButton";
 import TCollectionData from "@/types/collection/TCollectionData";
 import AttributeInputs from "@/components/edit/AttributeInputs";
+import TAttributeData from "@/types/collection/TAttributeData";
+import TReadAttributes from "@/types/item/TReadAttributes";
+import TAttributeValue from "@/types/item/TAttributeValue";
 
 export default function ItemEdit({
     collection,
@@ -36,6 +39,31 @@ export default function ItemEdit({
             };
         }),
     });
+
+    useEffect(() => {
+        if (data?.attributes.length) {
+            const setValueAtr: TAttributeValue[] = state.attributes.map(
+                (atr) => {
+                    const search = data.attributes.filter((atrValue) => {
+                        return atrValue.atr_id === atr.atr_id;
+                    });
+                    return {
+                        name: atr.name,
+                        type: atr.type,
+                        atr_id: atr.atr_id,
+                        value:
+                            atr.type === "date"
+                                ? search[0].value.toString().slice(0, 10)
+                                : search[0].value,
+                    };
+                },
+            );
+            setState({
+                ...state,
+                attributes: setValueAtr,
+            });
+        }
+    }, []);
 
     const handleImage = (value: string) => {
         setState({

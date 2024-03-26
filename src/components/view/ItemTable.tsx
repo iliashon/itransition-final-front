@@ -9,13 +9,10 @@ import TItemData from "@/types/item/TItemData";
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MdOpenInNew } from "react-icons/md";
-import { Button } from "@material-tailwind/react";
-import ActionItem from "@/components/view/ActionItem";
 import TUserData from "@/types/user/TUserData";
 import TCollectionData from "@/types/collection/TCollectionData";
 import getUserData from "@/utils/getUserData";
-import CollectionService from "@/services/collection.service";
+import ActionItems from "@/components/view/ActionItems";
 
 export default function ItemTable({
     data = [],
@@ -79,7 +76,7 @@ export default function ItemTable({
         renderRowActions: ({ row }) => {
             if (userData?.id === collection.user_id || userData?.is_admin) {
             }
-            return <ActionItem item={row.original} />;
+            return <ActionItems item={row.original} />;
         },
         renderTopToolbarCustomActions: (props) => {
             return (
