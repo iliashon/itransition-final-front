@@ -18,15 +18,15 @@ import { useSearchParams } from "next/navigation";
 export default function AuthModal() {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [openTab, setOpenTab] = useState<"login" | "signup">("login");
-    const urlSearchParams = useSearchParams();
+    const params = useSearchParams();
 
     const handleOpenModal = () => {
         setIsOpenModal(!isOpenModal);
     };
 
     useEffect(() => {
-        setIsOpenModal(urlSearchParams.has("login"));
-    }, []);
+        setIsOpenModal(params.has("login"));
+    }, [params]);
 
     return (
         <>

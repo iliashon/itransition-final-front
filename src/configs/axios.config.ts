@@ -44,7 +44,6 @@ api.interceptors.response.use(
                 return api.request(originalRequest);
             } catch (err) {
                 clearLocalStorage();
-                // reloadPage();
                 console.log(err);
             }
         }

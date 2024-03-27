@@ -30,7 +30,6 @@ export default function ItemSearch() {
             {
                 accessorKey: "name",
                 header: "Name",
-                size: 70,
                 Cell: (props) => (
                     <Link
                         href={`/item/${props.row.original.id}`}
@@ -43,7 +42,6 @@ export default function ItemSearch() {
             {
                 accessorKey: "image_url",
                 header: "Image",
-                size: 50,
                 Cell: (props) => {
                     return (
                         <Image
@@ -66,6 +64,35 @@ export default function ItemSearch() {
                 },
             },
             {
+                accessorKey: "collection.name",
+                header: "Collection",
+                Cell: (props) => {
+                    return (
+                        <Link
+                            href={`/collection/${props.row.original.collection_id}`}
+                        >
+                            {props.row.original.collection.name}
+                        </Link>
+                    );
+                },
+            },
+            {
+                accessorKey: "collection.type",
+                header: "Collection type",
+                Cell: (props) => {
+                    return props.row.original.collection.type;
+                },
+            },
+            {
+                accessorKey: "item_tag",
+                header: "Tags",
+                Cell: (props) => {
+                    return props.row.original.item_tag.map((item) => {
+                        return `${item.tag.text}, `;
+                    });
+                },
+            },
+            {
                 accessorKey: "created_at",
                 header: "Create time",
                 Cell: (props) =>
@@ -82,7 +109,7 @@ export default function ItemSearch() {
             isLoading: loading,
         },
         muiTableContainerProps: {
-            sx: { height: "calc(100vh - 290px)" },
+            sx: { height: "calc(100vh - 330px)" },
         },
         enableDensityToggle: false,
         enableColumnFilters: false,

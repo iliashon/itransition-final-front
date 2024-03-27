@@ -12,8 +12,6 @@ import { Button } from "@material-tailwind/react";
 import BackButton from "@/components/view/BackButton";
 import TCollectionData from "@/types/collection/TCollectionData";
 import AttributeInputs from "@/components/edit/AttributeInputs";
-import TAttributeData from "@/types/collection/TAttributeData";
-import TReadAttributes from "@/types/item/TReadAttributes";
 import TAttributeValue from "@/types/item/TAttributeValue";
 
 export default function ItemEdit({

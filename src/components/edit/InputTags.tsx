@@ -32,6 +32,10 @@ export default function InputTags({
     };
 
     useEffect(() => {
+        setTags(selected);
+    }, [selected]);
+
+    useEffect(() => {
         TagService.getAll().then((res) => {
             setSuggestions(
                 res.data.map((tag) => {
@@ -43,10 +47,6 @@ export default function InputTags({
             );
         });
     }, []);
-
-    useEffect(() => {
-        setTags(selected);
-    }, [selected]);
 
     return (
         <div className="">
