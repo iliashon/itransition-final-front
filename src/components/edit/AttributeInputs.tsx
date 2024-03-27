@@ -21,15 +21,6 @@ export default function AttributeInputs({
         });
     };
 
-    const handleSetBoolean = (index: number, value: boolean) => {
-        const newAtr = [...state.attributes];
-        newAtr[index].value = value;
-        setState({
-            ...state,
-            attributes: newAtr,
-        });
-    };
-
     return (
         <div>
             <h2 className="text-base font-semibold text-gray-900 mb-5">
@@ -49,7 +40,11 @@ export default function AttributeInputs({
                                         {atr.name}
                                         <Checkbox
                                             className="col-span-2"
-                                            checked={!!atr.value}
+                                            checked={
+                                                atr.value === undefined
+                                                    ? undefined
+                                                    : !!atr.value
+                                            }
                                             onChange={(event) =>
                                                 handleSetValue(
                                                     index,
@@ -96,7 +91,7 @@ export default function AttributeInputs({
                                             placeholder="Number"
                                             type="number"
                                             className="col-span-2 border dark:border-white border-black/30 bg-transparent rounded w-full px-3 py-2 focus:outline-none"
-                                            value={Number(atr.value)}
+                                            value={atr.value as string}
                                             onChange={(event) =>
                                                 handleSetValue(
                                                     index,

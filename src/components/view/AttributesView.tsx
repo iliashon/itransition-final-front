@@ -8,7 +8,7 @@ export default function AttributesView({
     return (
         <div>
             <h2 className="text-base font-semibold leading-7 text-gray-900 mb-5">
-                Attributes
+                {attributes.length > 0 && "Attributes"}
             </h2>
             <ul className="flex flex-col gap-5">
                 {attributes.map((atr) => {

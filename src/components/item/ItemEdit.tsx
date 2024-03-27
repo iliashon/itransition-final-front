@@ -8,7 +8,7 @@ import { Tag } from "react-tag-input";
 import ItemService from "@/services/item.service";
 import InputTags from "@/components/edit/InputTags";
 import UploadImage from "@/components/edit/UploadImage";
-import { Button } from "@material-tailwind/react";
+import { Alert, Button } from "@material-tailwind/react";
 import BackButton from "@/components/view/BackButton";
 import TCollectionData from "@/types/collection/TCollectionData";
 import AttributeInputs from "@/components/edit/AttributeInputs";
@@ -22,6 +22,7 @@ export default function ItemEdit({
     data?: TItemData;
 }) {
     const router = useRouter();
+    const [error, setError] = useState<string | undefined>();
     const [loading, setLoading] = useState(false);
     const [state, setState] = useState<TCreateItemData>({
         name: data?.name || "",
@@ -30,10 +31,11 @@ export default function ItemEdit({
         tags: [],
         attributes: collection.attribute.map((atr) => {
             return {
-                value: "",
+                value: undefined,
                 atr_id: atr.id,
                 type: atr.type,
                 name: atr.name,
+                require: atr.require,
             };
         }),
     });
@@ -53,6 +55,7 @@ export default function ItemEdit({
                             atr.type === "date"
                                 ? search[0].value.toString().slice(0, 10)
                                 : search[0].value,
+                        require: atr.require,
                     };
                 },
             );
@@ -77,8 +80,29 @@ export default function ItemEdit({
         });
     };
 
+    const validation = (): boolean => {
+        if (state.name.length < 2) {
+            setError("Title required field");
+            return true;
+        }
+        for (let i = 0; i < state.attributes.length; i++) {
+            if (
+                state.attributes[i].require &&
+                state.attributes[i].value?.toString().length === 0
+            ) {
+                setError(`${state.attributes[i].name} required field`);
+                return true;
+            }
+        }
+        return false;
+    };
+
     const handleUploadItem = async () => {
         setLoading(true);
+        if (validation()) {
+            setLoading(false);
+            return;
+        }
         if (data) {
             const item = await ItemService.update(
                 {
@@ -126,13 +150,20 @@ export default function ItemEdit({
                         setValue={handleImage}
                         folder_name="item"
                     />
-                    <Button
-                        loading={loading}
-                        onClick={handleUploadItem}
-                        className="dark:text-black dark:bg-white flex justify-center my-5 lg:m-0"
-                    >
-                        {data ? "Update" : "Create"}
-                    </Button>
+                    <div className="flex flex-col gap-5">
+                        {error && (
+                            <Alert color="red" className="py-2 text-sm">
+                                {error}
+                            </Alert>
+                        )}
+                        <Button
+                            loading={loading}
+                            onClick={handleUploadItem}
+                            className="dark:text-black dark:bg-white flex justify-center my-5 lg:m-0"
+                        >
+                            {data ? "Update" : "Create"}
+                        </Button>
+                    </div>
                 </div>
             </section>
         </main>
