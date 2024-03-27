@@ -13,6 +13,8 @@ import TUserData from "@/types/user/TUserData";
 import TCollectionData from "@/types/collection/TCollectionData";
 import getUserData from "@/utils/getUserData";
 import ActionItems from "@/components/view/ActionItems";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { useTheme } from "next-themes";
 
 export default function ItemTable({
     data = [],
@@ -24,6 +26,7 @@ export default function ItemTable({
     collection: TCollectionData;
 }) {
     const [userData, setUserData] = useState<TUserData | null>();
+    const theme = useTheme();
 
     useEffect(() => {
         setUserData(getUserData());
@@ -73,6 +76,9 @@ export default function ItemTable({
         data,
         enablePagination: true,
         enableRowActions: !!userData,
+        mrtTheme: {
+            baseBackgroundColor: theme.theme === "dark" ? "#1e1e1e" : "#fff",
+        },
         renderRowActions: ({ row }) => {
             if (userData?.id === collection.user_id || userData?.is_admin) {
             }
@@ -92,5 +98,15 @@ export default function ItemTable({
         },
     });
 
-    return <MaterialReactTable table={table} />;
+    return (
+        <ThemeProvider
+            theme={createTheme({
+                palette: {
+                    mode: theme.theme === "dark" ? "dark" : "light",
+                },
+            })}
+        >
+            <MaterialReactTable table={table} />
+        </ThemeProvider>
+    );
 }

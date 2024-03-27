@@ -8,7 +8,7 @@ export default function TagsView({ tags }: { tags: Tag[] }) {
                 return (
                     <Link
                         key={tag.id}
-                        href={`?tag=${tag.text}`}
+                        href={`/item?search=${tag.text}`}
                         className="border dark:border-white/50 border-black/50 rounded-lg px-2"
                     >
                         {tag.text}

@@ -11,11 +11,14 @@ import { useSearchParams } from "next/navigation";
 import ItemService from "@/services/item.service";
 import { TSearchItemData } from "@/types/item/TItemData";
 import Image from "next/image";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { useTheme } from "next-themes";
 
 export default function ItemSearch() {
     const [data, setData] = useState<TSearchItemData[]>();
     const [loading, setLoading] = useState(true);
     const params = useSearchParams();
+    const theme = useTheme();
 
     useEffect(() => {
         setLoading(true);
@@ -88,15 +91,16 @@ export default function ItemSearch() {
                 header: "Tags",
                 Cell: (props) => {
                     return (
-                        <div className="">
+                        <div className="w-full flex gap-1 flex-wrap">
                             {props.row.original.item_tag.map((item) => {
                                 return (
-                                    <span
-                                        className="border px-2 py-1 rounded-sm"
+                                    <Link
+                                        href={`/item?search=${item.tag.text}`}
+                                        className="border dark:border-white/50 border-black/50 px-2 py-1 rounded-lg hover:scale-95 duration-300"
                                         key={item.tag.id}
                                     >
                                         {item.tag.text}
-                                    </span>
+                                    </Link>
                                 );
                             })}
                         </div>
@@ -127,6 +131,9 @@ export default function ItemSearch() {
         enableFilters: false,
         enableColumnActions: false,
         enableHiding: false,
+        mrtTheme: {
+            baseBackgroundColor: theme.theme === "dark" ? "#1e1e1e" : "#fff",
+        },
     });
 
     return (
@@ -134,7 +141,16 @@ export default function ItemSearch() {
             <h1 className="font-semibold text-2xl my-5">
                 Search results for: {params.get("search")}
             </h1>
-            <MaterialReactTable table={table} />
+
+            <ThemeProvider
+                theme={createTheme({
+                    palette: {
+                        mode: theme.theme === "dark" ? "dark" : "light",
+                    },
+                })}
+            >
+                <MaterialReactTable table={table} />
+            </ThemeProvider>
         </main>
     );
 }

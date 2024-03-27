@@ -14,14 +14,16 @@ import { MdDelete } from "react-icons/md";
 import { RiAdminFill } from "react-icons/ri";
 import { TbLock } from "react-icons/tb";
 import useAuth from "@/hooks/useAuth";
-import { useRouter } from "next/navigation";
 import reloadPage from "@/utils/reloadPage";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { useTheme } from "next-themes";
 
 export default function UsersTable({ userData }: { userData: TUserData }) {
     const [users, setUsers] = useState<TUserData[]>();
     const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
     const [loading, setLoading] = useState(true);
     const { refresh } = useAuth();
+    const theme = useTheme();
 
     const getUsers = () => {
         setLoading(true);
@@ -152,6 +154,9 @@ export default function UsersTable({ userData }: { userData: TUserData }) {
         enableColumnActions: false,
         enableHiding: false,
         enableRowActions: true,
+        mrtTheme: {
+            baseBackgroundColor: theme.theme === "dark" ? "#1e1e1e" : "#fff",
+        },
         renderTopToolbarCustomActions: ({ table }) => {
             return (
                 <div className="flex gap-3 flex-wrap mb-3 items-center">
@@ -239,5 +244,15 @@ export default function UsersTable({ userData }: { userData: TUserData }) {
         },
     });
 
-    return <MaterialReactTable table={table} />;
+    return (
+        <ThemeProvider
+            theme={createTheme({
+                palette: {
+                    mode: theme.theme === "dark" ? "dark" : "light",
+                },
+            })}
+        >
+            <MaterialReactTable table={table} />
+        </ThemeProvider>
+    );
 }

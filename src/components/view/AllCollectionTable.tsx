@@ -16,6 +16,8 @@ import ActionCollection from "@/components/view/ActionCollection";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 import { Button } from "@material-tailwind/react";
 import { MdOutlineSaveAlt } from "react-icons/md";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { useTheme } from "next-themes";
 
 const csvConfig = mkConfig({
     fieldSeparator: ",",
@@ -27,6 +29,7 @@ export default function AllCollectionTable() {
     const [userData, setUserData] = useState<TUserData | null>();
     const [data, setData] = useState<TCollectionData[]>([]);
     const [loading, setLoading] = useState(true);
+    const theme = useTheme();
 
     const getCollections = () => {
         setLoading(true);
@@ -130,6 +133,9 @@ export default function AllCollectionTable() {
         enableColumnActions: false,
         enableHiding: false,
         enableRowActions: !!userData,
+        mrtTheme: {
+            baseBackgroundColor: theme.theme === "dark" ? "#1e1e1e" : "#fff",
+        },
         renderRowActions: ({ row }) => {
             if (userData?.id === row.original.user_id || userData?.is_admin) {
                 return (
@@ -155,5 +161,15 @@ export default function AllCollectionTable() {
         },
     });
 
-    return <MaterialReactTable table={table} />;
+    return (
+        <ThemeProvider
+            theme={createTheme({
+                palette: {
+                    mode: theme.theme === "dark" ? "dark" : "light",
+                },
+            })}
+        >
+            <MaterialReactTable table={table} />
+        </ThemeProvider>
+    );
 }
