@@ -91,7 +91,10 @@ export default function ItemSearch() {
                         <div className="">
                             {props.row.original.item_tag.map((item) => {
                                 return (
-                                    <span className="border px-2 py-1 rounded-sm">
+                                    <span
+                                        className="border px-2 py-1 rounded-sm"
+                                        key={item.tag.id}
+                                    >
                                         {item.tag.text}
                                     </span>
                                 );
