@@ -28,12 +28,17 @@ export default function AllCollectionTable() {
     const [data, setData] = useState<TCollectionData[]>([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        setUserData(getUserData());
+    const getCollections = () => {
+        setLoading(true);
         CollectionService.getAll().then((res) => {
             setData(res.data);
             setLoading(false);
         });
+    };
+
+    useEffect(() => {
+        setUserData(getUserData());
+        getCollections();
     }, []);
 
     const handleDownloadCsv = () => {
@@ -127,7 +132,12 @@ export default function AllCollectionTable() {
         enableRowActions: !!userData,
         renderRowActions: ({ row }) => {
             if (userData?.id === row.original.user_id || userData?.is_admin) {
-                return <ActionCollection collection={row.original} />;
+                return (
+                    <ActionCollection
+                        onDelete={() => getCollections()}
+                        collection={row.original}
+                    />
+                );
             }
         },
         renderTopToolbarCustomActions: (props) => {

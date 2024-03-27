@@ -42,6 +42,7 @@ export default function ItemEdit({
 
     useEffect(() => {
         if (data?.attributes.length) {
+            console.log(data.attributes);
             const setValueAtr: TAttributeValue[] = state.attributes.map(
                 (atr) => {
                     const search = data.attributes.filter((atrValue) => {
@@ -53,8 +54,8 @@ export default function ItemEdit({
                         atr_id: atr.atr_id,
                         value:
                             atr.type === "date"
-                                ? search[0].value.toString().slice(0, 10)
-                                : search[0].value,
+                                ? search[0]?.value.toString().slice(0, 10)
+                                : search[0]?.value,
                         require: atr.require,
                     };
                 },

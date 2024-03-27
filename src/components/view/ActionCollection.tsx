@@ -6,8 +6,10 @@ import { useRouter } from "next/navigation";
 
 export default function ActionCollection({
     collection,
+    onDelete,
 }: {
     collection: TCollectionData;
+    onDelete?: () => void;
 }) {
     const router = useRouter();
 
@@ -15,6 +17,9 @@ export default function ActionCollection({
         await CollectionService.delete(collection.id).then((res) => {
             router.push("/collection");
             router.refresh();
+            if (onDelete) {
+                onDelete();
+            }
         });
     };
 
