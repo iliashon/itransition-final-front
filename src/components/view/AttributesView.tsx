@@ -7,7 +7,7 @@ export default function AttributesView({
 }) {
     return (
         <div>
-            <h2 className="text-base font-semibold leading-7 text-gray-900 mb-5">
+            <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white mb-5">
                 {attributes.length > 0 && "Attributes"}
             </h2>
             <ul className="flex flex-col gap-5">
@@ -21,10 +21,10 @@ export default function AttributesView({
                                         className="grid grid-cols-3"
                                         key={atr.id}
                                     >
-                                        <h4 className="text-sm font-medium leading-6 text-gray-900">
+                                        <h4 className="text-sm font-medium leading-6 text-gray-900 dark:text-white">
                                             {atr.name}
                                         </h4>
-                                        <p className="col-span-2 text-sm text-gray-700 overflow-hidden">
+                                        <p className="col-span-2 text-sm text-gray-700 dark:text-white overflow-hidden">
                                             {atr.value.toString()}
                                         </p>
                                     </li>
@@ -38,10 +38,10 @@ export default function AttributesView({
                                         className="grid grid-cols-3"
                                         key={atr.id}
                                     >
-                                        <h4 className="text-sm font-medium leading-6 text-gray-900">
+                                        <h4 className="text-sm font-medium leading-6 text-gray-900 dark:text-white">
                                             {atr.name}
                                         </h4>
-                                        <p className="col-span-2 text-sm text-gray-700">
+                                        <p className="col-span-2 text-sm text-gray-700 dark:text-white">
                                             {atr.value ? "Yes" : "No"}
                                         </p>
                                     </li>
@@ -55,10 +55,10 @@ export default function AttributesView({
                                         className="grid grid-cols-3"
                                         key={atr.id}
                                     >
-                                        <h4 className="text-sm font-medium leading-6 text-gray-900">
+                                        <h4 className="text-sm font-medium leading-6 text-gray-900 dark:text-white">
                                             {atr.name}
                                         </h4>
-                                        <p className="col-span-2 text-sm text-gray-700">
+                                        <p className="col-span-2 text-sm text-gray-700 dark:text-white">
                                             {atr.value.toString()}
                                         </p>
                                     </li>
@@ -72,10 +72,10 @@ export default function AttributesView({
                                         className="grid grid-cols-3"
                                         key={atr.id}
                                     >
-                                        <h4 className="text-sm font-medium leading-6 text-gray-900">
+                                        <h4 className="text-sm font-medium leading-6 text-gray-900 dark:text-white">
                                             {atr.name}
                                         </h4>
-                                        <p className="col-span-2 text-sm text-gray-700">
+                                        <p className="col-span-2 text-sm text-gray-700 dark:text-white">
                                             {new Date(
                                                 atr.value.toString(),
                                             ).toLocaleString("en-GB", {
@@ -95,10 +95,10 @@ export default function AttributesView({
                                         className="grid grid-cols-3"
                                         key={atr.id}
                                     >
-                                        <h4 className="text-sm font-medium leading-6 text-gray-900">
+                                        <h4 className="text-sm font-medium leading-6 text-gray-900 dark:text-white">
                                             {atr.name}
                                         </h4>
-                                        <p className="col-span-2 text-sm text-gray-700">
+                                        <p className="col-span-2 text-sm text-gray-700 dark:text-white">
                                             {atr.value.toString()}
                                         </p>
                                     </li>

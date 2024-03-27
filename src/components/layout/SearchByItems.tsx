@@ -3,12 +3,13 @@
 import { Input } from "@material-tailwind/react";
 import { useTheme } from "next-themes";
 import { FormEvent, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { CiSearch } from "react-icons/ci";
 
 export default function SearchByItems({ className }: { className?: string }) {
     const [inputValue, setInputValue] = useState("");
     const router = useRouter();
+    const params = useSearchParams();
 
     const handleSubmitSearch = (event: FormEvent) => {
         event.preventDefault();
@@ -16,6 +17,10 @@ export default function SearchByItems({ className }: { className?: string }) {
             router.push(`/item?search=${inputValue}`);
         }
     };
+
+    useEffect(() => {
+        setInputValue(params.get("search") || "");
+    }, [params]);
 
     return (
         <form className={className} onSubmit={handleSubmitSearch}>
