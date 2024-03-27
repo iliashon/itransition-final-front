@@ -53,6 +53,19 @@ export default function HomeView({
                     minSize={20}
                     shuffle
                     colorOptions={{ luminosity: "light", hue: "monochrome" }}
+                    renderer={(tag, size, color) => (
+                        <Link
+                            href={`/item?search=${tag.value}`}
+                            key={tag.value}
+                            style={{
+                                fontSize: size,
+                                color: color,
+                            }}
+                            className="hover:scale-110 duration-300 hover:!text-black dark:hover:!text-white"
+                        >
+                            {tag.value}
+                        </Link>
+                    )}
                 />
             </section>
             <hr className="my-10" />
