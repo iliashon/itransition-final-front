@@ -87,9 +87,17 @@ export default function ItemSearch() {
                 accessorKey: "item_tag",
                 header: "Tags",
                 Cell: (props) => {
-                    return props.row.original.item_tag.map((item) => {
-                        return `${item.tag.text}, `;
-                    });
+                    return (
+                        <div className="">
+                            {props.row.original.item_tag.map((item) => {
+                                return (
+                                    <span className="border px-2 py-1 rounded-sm">
+                                        {item.tag.text}
+                                    </span>
+                                );
+                            })}
+                        </div>
+                    );
                 },
             },
             {

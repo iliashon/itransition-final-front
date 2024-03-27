@@ -42,7 +42,6 @@ export default function ItemEdit({
 
     useEffect(() => {
         if (data?.attributes.length) {
-            console.log(data.attributes);
             const setValueAtr: TAttributeValue[] = state.attributes.map(
                 (atr) => {
                     const search = data.attributes.filter((atrValue) => {
@@ -88,8 +87,9 @@ export default function ItemEdit({
         }
         for (let i = 0; i < state.attributes.length; i++) {
             if (
-                state.attributes[i].require &&
-                state.attributes[i].value?.toString().length === 0
+                (state.attributes[i].require &&
+                    state.attributes[i].value?.toString().length === 0) ||
+                state.attributes[i].value === undefined
             ) {
                 setError(`${state.attributes[i].name} required field`);
                 return true;

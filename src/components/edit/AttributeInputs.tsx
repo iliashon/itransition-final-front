@@ -37,7 +37,16 @@ export default function AttributeInputs({
                                         className="grid grid-cols-3 text-sm font-medium text-gray-900"
                                         key={atr.atr_id}
                                     >
-                                        {atr.name}
+                                        {atr.require ? (
+                                            <div>
+                                                {atr.name}
+                                                <span className="text-red-500 text-lg">
+                                                    *
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            atr.name
+                                        )}
                                         <Checkbox
                                             className="col-span-2"
                                             checked={
@@ -63,7 +72,16 @@ export default function AttributeInputs({
                                         className="grid grid-cols-3 text-sm font-medium text-gray-900"
                                         key={atr.atr_id}
                                     >
-                                        {atr.name}
+                                        {atr.require ? (
+                                            <div>
+                                                {atr.name}
+                                                <span className="text-red-500 text-lg">
+                                                    *
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            atr.name
+                                        )}
                                         <textarea
                                             placeholder="Text"
                                             className="col-span-2 h-40 resize-none border focus:outline-none p-3 text-sm dark:border-white border-black/30 bg-transparent rounded"
@@ -86,7 +104,16 @@ export default function AttributeInputs({
                                         className="grid grid-cols-3 text-sm font-medium text-gray-900"
                                         key={atr.atr_id}
                                     >
-                                        {atr.name}
+                                        {atr.require ? (
+                                            <div>
+                                                {atr.name}
+                                                <span className="text-red-500 text-lg">
+                                                    *
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            atr.name
+                                        )}
                                         <input
                                             placeholder="Number"
                                             type="number"
@@ -110,7 +137,16 @@ export default function AttributeInputs({
                                         className="grid grid-cols-3 text-sm font-medium text-gray-900"
                                         key={atr.atr_id}
                                     >
-                                        {atr.name}
+                                        {atr.require ? (
+                                            <div>
+                                                {atr.name}
+                                                <span className="text-red-500 text-lg">
+                                                    *
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            atr.name
+                                        )}
                                         <input
                                             type="text"
                                             placeholder="Value"
@@ -134,7 +170,16 @@ export default function AttributeInputs({
                                         className="grid grid-cols-3 text-sm font-medium text-gray-900"
                                         key={atr.atr_id}
                                     >
-                                        {atr.name}
+                                        {atr.require ? (
+                                            <div>
+                                                {atr.name}
+                                                <span className="text-red-500 text-lg">
+                                                    *
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            atr.name
+                                        )}
                                         <input
                                             type="date"
                                             className="col-span-2 border dark:border-white border-black/30 bg-transparent rounded w-full px-3 py-2 focus:outline-none"
