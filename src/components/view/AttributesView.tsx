@@ -24,7 +24,7 @@ export default function AttributesView({
                                         <h4 className="text-sm font-medium leading-6 text-gray-900">
                                             {atr.name}
                                         </h4>
-                                        <p className="col-span-2 text-sm text-gray-700">
+                                        <p className="col-span-2 text-sm text-gray-700 overflow-hidden">
                                             {atr.value.toString()}
                                         </p>
                                     </li>

@@ -13,10 +13,19 @@ import TUserData from "@/types/user/TUserData";
 import getUserData from "@/utils/getUserData";
 import CollectionService from "@/services/collection.service";
 import ActionCollection from "@/components/view/ActionCollection";
+import { mkConfig, generateCsv, download } from "export-to-csv";
+import { Button } from "@material-tailwind/react";
+import { MdOutlineSaveAlt } from "react-icons/md";
+
+const csvConfig = mkConfig({
+    fieldSeparator: ",",
+    decimalSeparator: ".",
+    useKeysAsHeaders: true,
+});
 
 export default function AllCollectionTable() {
     const [userData, setUserData] = useState<TUserData | null>();
-    const [data, setData] = useState<TCollectionData[]>();
+    const [data, setData] = useState<TCollectionData[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -26,6 +35,24 @@ export default function AllCollectionTable() {
             setLoading(false);
         });
     }, []);
+
+    const handleDownloadCsv = () => {
+        const csv = generateCsv(csvConfig)(
+            data.map((item) => {
+                return {
+                    id: item.id,
+                    name: item.name,
+                    image: item.image_url,
+                    author: `${item.user.first_name} ${item.user.last_name}`,
+                    count_item: item._count.item,
+                    type: item.type,
+                    created_at: new Date(item.created_at).toLocaleString(),
+                    description: item.description,
+                };
+            }),
+        );
+        download(csvConfig)(csv);
+    };
 
     const columns = useMemo<MRT_ColumnDef<TCollectionData>[]>(
         () => [
@@ -102,6 +129,19 @@ export default function AllCollectionTable() {
             if (userData?.id === row.original.user_id || userData?.is_admin) {
                 return <ActionCollection collection={row.original} />;
             }
+        },
+        renderTopToolbarCustomActions: (props) => {
+            return (
+                <Button
+                    size="sm"
+                    color="green"
+                    className="hover:shadow-none flex items-center gap-2"
+                    onClick={handleDownloadCsv}
+                >
+                    <MdOutlineSaveAlt className="w-4 h-4" />
+                    CSV
+                </Button>
+            );
         },
     });
 

@@ -1,27 +1,33 @@
 import Link from "next/link";
-import Logo from "@/components/layout/Logo";
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
     return (
-        <footer className="w-full pt-5">
-            <div className="p-4 border-b dark:border-b-white/30 border-black/30 flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
-                <Logo />
-                <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
-                    <li>
-                        <Link href="/" className="font-normal">
-                            Home
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/collection" className="font-normal">
-                            Collections
-                        </Link>
-                    </li>
-                </ul>
+        <footer className="w-full px-4 flex gap-5 items-center justify-between mt-5 border-t dark:border-t-white/30 border-t-black/30 py-4">
+            <p className="font-normal">&copy; 2024 Tupalski Ilya</p>
+            <div className="flex gap-5">
+                <Link
+                    href="https://github.com/iliashon"
+                    className="hover:scale-110 duration-300"
+                    target="_blank"
+                >
+                    <FaGithub className="h-6 w-6" />
+                </Link>
+                <Link
+                    href="https://www.linkedin.com/in/ilya-tupalski/"
+                    className="hover:scale-110 duration-300"
+                    target="_blank"
+                >
+                    <FaLinkedin className="h-6 w-6" />
+                </Link>
+                <Link
+                    href="https://www.instagram.com/ilia_shon/"
+                    className="hover:scale-110 duration-300"
+                    target="_blank"
+                >
+                    <FaInstagram className="h-6 w-6" />
+                </Link>
             </div>
-            <p className="text-center font-normal py-4">
-                &copy; 2024 Tupalski Ilya
-            </p>
         </footer>
     );
 }

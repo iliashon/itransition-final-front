@@ -1,6 +1,6 @@
 import axios from "axios";
 import TCreateItemData from "@/types/item/TCreateItemData";
-import TItemData from "@/types/item/TItemData";
+import TItemData, { TSearchItemData } from "@/types/item/TItemData";
 import { api, API_HOST } from "@/configs/axios.config";
 
 class ItemService {
@@ -30,6 +30,12 @@ class ItemService {
 
     getLastItems() {
         return axios.get<TItemData[]>(`${API_HOST}/item/last`);
+    }
+
+    search(search: string) {
+        return axios.get<TSearchItemData[]>(`${API_HOST}/search`, {
+            params: { search },
+        });
     }
 }
 

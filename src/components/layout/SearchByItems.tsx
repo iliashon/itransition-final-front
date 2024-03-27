@@ -13,8 +13,7 @@ export default function SearchByItems({ className }: { className?: string }) {
     const handleSubmitSearch = (event: FormEvent) => {
         event.preventDefault();
         if (inputValue.length > 0) {
-            setInputValue("");
-            router.push(`/items?search=${inputValue}`);
+            router.push(`/item?search=${inputValue}`);
         }
     };
 

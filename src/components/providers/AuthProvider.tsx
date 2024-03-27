@@ -40,7 +40,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         <>
             {error && (
                 <Alert
-                    className="absolute left-2 bottom-2 text-sm py-3 w-1/2"
+                    className="absolute left-2 bottom-2 text-sm py-3 w-1/2 z-10"
                     color="red"
                 >
                     {error}
