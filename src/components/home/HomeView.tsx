@@ -38,12 +38,6 @@ export default function HomeView({
                         >
                             Collections
                         </Link>
-                        <Link
-                            href="#"
-                            className="border dark:border-white border-black/30 py-2 w-40 rounded-lg flex justify-center text-sm font-semibold hover:shadow duration-300"
-                        >
-                            Try Now
-                        </Link>
                     </div>
                 </div>
                 <TagCloud
