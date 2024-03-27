@@ -22,6 +22,7 @@ import { useTheme } from "next-themes";
 const csvConfig = mkConfig({
     fieldSeparator: ",",
     decimalSeparator: ".",
+    filename: "collections",
     useKeysAsHeaders: true,
 });
 
