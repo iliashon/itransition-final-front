@@ -57,6 +57,7 @@ export default function HomeView({
                         <Link
                             href={`/item?search=${tag.value}`}
                             key={tag.value}
+                            prefetch={false}
                             style={{
                                 fontSize: size,
                                 color: color,
