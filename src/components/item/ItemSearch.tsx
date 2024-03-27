@@ -94,7 +94,7 @@ export default function ItemSearch() {
     return (
         <main className="px-4">
             <h1 className="font-semibold text-2xl my-5">
-                Search results for: "{params.get("search")}"
+                Search results for: {params.get("search")}
             </h1>
             <MaterialReactTable table={table} />
         </main>
