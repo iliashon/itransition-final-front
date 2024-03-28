@@ -126,7 +126,13 @@ export default function ItemEdit({
                 <h1 className="text-3xl font-bold py-7">
                     {data ? "Edit item" : "Create item"}
                 </h1>
-                <BackButton />
+                <BackButton
+                    backPath={
+                        data
+                            ? `/item/${data.id}`
+                            : `/collection/${collection.id}`
+                    }
+                />
             </div>
             <section className="relative grid lg:grid-cols-3 grid-cols-1 gap-5">
                 <div className="flex flex-col gap-5 lg:col-span-2 col-auto">

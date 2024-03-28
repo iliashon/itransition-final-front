@@ -31,7 +31,7 @@ export default function ItemView({
     return (
         <main className="mt-5 px-4 max-w-[1320px] mx-auto">
             <div className="mb-5">
-                <BackButton />
+                <BackButton backPath={`/collection/${collection.id}`} />
             </div>
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mb-5">
                 <div className="relative h-[500px] w-full overflow-hidden rounded-2xl bg-white border">

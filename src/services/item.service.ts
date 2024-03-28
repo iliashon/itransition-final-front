@@ -1,6 +1,9 @@
 import axios from "axios";
 import TCreateItemData from "@/types/item/TCreateItemData";
-import TItemData, { TSearchItemData } from "@/types/item/TItemData";
+import TItemData, {
+    TItemTableView,
+    TSearchItemData,
+} from "@/types/item/TItemData";
 import { api, API_HOST } from "@/configs/axios.config";
 
 class ItemService {
@@ -13,7 +16,7 @@ class ItemService {
     }
 
     getAll(collection_id?: number) {
-        return axios.get<TItemData[]>(`${API_HOST}/item`, {
+        return axios.get<TItemTableView[]>(`${API_HOST}/item`, {
             data: collection_id ? { collection_id } : {},
         });
     }

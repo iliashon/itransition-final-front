@@ -65,7 +65,9 @@ export default function CollectionEdit({ data }: { data?: TCollectionData }) {
                 <h1 className="text-3xl font-bold py-7">
                     {data ? "Edit collection" : "Create collection"}
                 </h1>
-                <BackButton />
+                <BackButton
+                    backPath={data ? `/collection/${data.id}` : "/collection"}
+                />
             </div>
             <section className="relative grid lg:grid-cols-3 grid-cols-1 gap-5">
                 <div className="flex flex-col gap-5 lg:col-span-2 col-auto">

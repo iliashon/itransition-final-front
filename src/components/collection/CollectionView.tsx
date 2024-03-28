@@ -2,7 +2,7 @@
 
 import ItemTable from "@/components/view/ItemTable";
 import TCollectionData from "@/types/collection/TCollectionData";
-import TItemData from "@/types/item/TItemData";
+import TItemData, { TItemTableView } from "@/types/item/TItemData";
 import MarkdownEditor from "@uiw/react-markdown-editor";
 import ActionCollection from "@/components/view/ActionCollection";
 import { useEffect, useState } from "react";
@@ -15,7 +15,7 @@ export default function CollectionView({
     items,
 }: {
     collection: TCollectionData;
-    items: TItemData[];
+    items: TItemTableView[];
 }) {
     const [userData, setUserData] = useState<TUserData | null>();
 
@@ -25,7 +25,7 @@ export default function CollectionView({
 
     return (
         <main className="lg:px-14 px-4 mt-10 mb-5 flex flex-col gap-5">
-            <BackButton />
+            <BackButton backPath={"/collection"} />
             <div className="grid xl:grid-cols-2 grid-cols-1 items-center gap-5">
                 <div className="flex flex-col gap-5">
                     <div className="flex justify-between">
