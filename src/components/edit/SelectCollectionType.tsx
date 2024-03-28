@@ -2,6 +2,7 @@ import { Option, Select } from "@material-tailwind/react";
 import TCollectionType from "@/types/collection/TCollectionType";
 import { useEffect, useState } from "react";
 import CollectionService from "@/services/collection.service";
+import { useTranslation } from "react-i18next";
 
 export default function SelectCollectionType({
     value,
@@ -11,6 +12,7 @@ export default function SelectCollectionType({
     setValue: (value: string) => void;
 }) {
     const [collectionTypes, setCollectionTypes] = useState<TCollectionType[]>();
+    const { t } = useTranslation();
 
     useEffect(() => {
         CollectionService.getAllType().then((res) =>
@@ -22,7 +24,7 @@ export default function SelectCollectionType({
         <>
             {collectionTypes && (
                 <Select
-                    label="Collection type"
+                    label={t("collection_edit.collection_type_placeholder")}
                     className="dark:text-white"
                     labelProps={{
                         className: "dark:text-white",

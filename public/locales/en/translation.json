@@ -38,6 +38,16 @@
   "search_items": {
     "title": "Search results for:"
   },
+  "users_table": {
+    "title": "Users table"
+  },
+  "collection_edit": {
+    "title_create": "Create collection",
+    "title_edit": "Edit collection",
+    "title_placeholder": "Title",
+    "collection_type_placeholder": "Collection type",
+    "title_attributes": "Attributes"
+  },
   "table_col": {
     "name": "Name",
     "image": "Image",
@@ -48,7 +58,11 @@
     "like_count": "Likes count",
     "tags": "Tags",
     "collection_type": "Collection type",
-    "collection": "Collection"
+    "collection": "Collection",
+    "full_name": "Full name",
+    "email": "Email",
+    "blocked": "Blocked",
+    "admin": "Admin"
   },
   "button_create_item": "Create Item",
   "button_back": "Back",

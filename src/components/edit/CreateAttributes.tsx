@@ -15,6 +15,7 @@ import { MdDelete } from "react-icons/md";
 import { Dispatch, SetStateAction } from "react";
 import { TTypeAtr } from "@/types/collection/TAttributeData";
 import TCreateCollectionData from "@/types/collection/TCreateCollectionData";
+import { useTranslation } from "react-i18next";
 
 export default function CreateAttributes({
     state,
@@ -23,6 +24,7 @@ export default function CreateAttributes({
     state: TCreateCollectionData;
     setState: Dispatch<SetStateAction<TCreateCollectionData>>;
 }) {
+    const { t } = useTranslation();
     const handleAddAttribute = () => {
         setState({
             ...state,
@@ -87,7 +89,9 @@ export default function CreateAttributes({
                 shadow={false}
                 className="flex justify-between items-center gap-3 z-20"
             >
-                <span className="font-semibold">Attributes</span>
+                <span className="font-semibold">
+                    {t("collection_edit.title_attributes")}
+                </span>
                 <FaCirclePlus
                     onClick={handleAddAttribute}
                     className="h-7 w-7 cursor-pointer text-green-500 opacity-50 hover:opacity-100 duration-300"
@@ -131,13 +135,21 @@ export default function CreateAttributes({
                                             )
                                         }
                                     >
-                                        <Option value="text">Text</Option>
-                                        <Option value="boolean">Boolean</Option>
-                                        <Option value="varchar">
-                                            VarChar 256
+                                        <Option value="text">
+                                            Text (textarea)
                                         </Option>
-                                        <Option value="integer">Integer</Option>
-                                        <Option value="date">Date</Option>
+                                        <Option value="boolean">
+                                            Boolean (checkbox)
+                                        </Option>
+                                        <Option value="varchar">
+                                            VarChar (input text)
+                                        </Option>
+                                        <Option value="integer">
+                                            Integer (input number)
+                                        </Option>
+                                        <Option value="date">
+                                            Date (input date)
+                                        </Option>
                                     </Select>
                                 </div>
                                 <div className="flex justify-between w-full">

@@ -17,6 +17,7 @@ import useAuth from "@/hooks/useAuth";
 import reloadPage from "@/utils/reloadPage";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { useTheme } from "next-themes";
+import { useTranslation } from "react-i18next";
 
 export default function UsersTable({ userData }: { userData: TUserData }) {
     const [users, setUsers] = useState<TUserData[]>();
@@ -24,6 +25,7 @@ export default function UsersTable({ userData }: { userData: TUserData }) {
     const [loading, setLoading] = useState(true);
     const { refresh } = useAuth();
     const theme = useTheme();
+    const { t } = useTranslation();
 
     const getUsers = () => {
         setLoading(true);
@@ -85,18 +87,18 @@ export default function UsersTable({ userData }: { userData: TUserData }) {
             },
             {
                 accessorKey: "first_name",
-                header: "Full name",
+                header: t("table_col.full_name"),
                 Cell: (props) => {
                     return `${props.row.original.first_name} ${props.row.original.last_name}`;
                 },
             },
             {
                 accessorKey: "email",
-                header: "Email",
+                header: t("table_col.email"),
             },
             {
                 accessorKey: "blocked",
-                header: "Blocked",
+                header: t("table_col.blocked"),
                 Cell: (props) => {
                     return !props.row.original.blocked ? (
                         <AiFillCloseCircle className="h-7 w-7 text-red-500" />
@@ -107,7 +109,7 @@ export default function UsersTable({ userData }: { userData: TUserData }) {
             },
             {
                 accessorKey: "is_admin",
-                header: "Admin",
+                header: t("table_col.admin"),
                 Cell: (props) => {
                     return !props.row.original.is_admin ? (
                         <AiFillCloseCircle className="h-7 w-7 text-red-500" />
@@ -118,7 +120,7 @@ export default function UsersTable({ userData }: { userData: TUserData }) {
             },
             {
                 accessorKey: "created_at",
-                header: "Create time",
+                header: t("table_col.created_at"),
                 Cell: (props) => {
                     return (
                         <span>

@@ -11,6 +11,7 @@ import { Button } from "@material-tailwind/react";
 import MarkdownEditor from "@uiw/react-markdown-editor";
 import BackButton from "@/components/view/BackButton";
 import CreateAttributes from "@/components/edit/CreateAttributes";
+import { useTranslation } from "react-i18next";
 
 export default function CollectionEdit({ data }: { data?: TCollectionData }) {
     const router = useRouter();
@@ -22,6 +23,7 @@ export default function CollectionEdit({ data }: { data?: TCollectionData }) {
         image_url: data?.image_url || "",
         attributes: [],
     });
+    const { t } = useTranslation();
 
     const handleType = (value: string) => {
         setState({ ...state, type: value });
@@ -74,7 +76,7 @@ export default function CollectionEdit({ data }: { data?: TCollectionData }) {
                     <input
                         type="text"
                         className="border dark:border-white border-black/30 bg-transparent rounded w-full h-12 px-3 text-xl focus:outline-none"
-                        placeholder="Title"
+                        placeholder={t("collection_edit.title_placeholder")}
                         value={state.name}
                         onChange={(event) =>
                             setState({

@@ -38,6 +38,16 @@
   "search_items": {
     "title": "Результат поиска для:"
   },
+  "users_table": {
+    "title": "Таблица пользователей"
+  },
+  "collection_edit": {
+    "title_create": "Создание коллеции",
+    "title_edit": "Редактирование коллеции",
+    "title_placeholder": "Заголовок",
+    "collection_type_placeholder": "Тип коллекции",
+    "title_attributes": "Атрибуты"
+  },
   "table_col": {
     "name": "Название",
     "image": "Изображение",
@@ -48,7 +58,11 @@
     "like_count": "Количество лайков",
     "tags": "Теги",
     "collection_type": "Тип коллекции",
-    "collection": "Коллекция"
+    "collection": "Коллекция",
+    "full_name": "Полное имя",
+    "email": "Почта",
+    "blocked": "Заблокирован",
+    "admin": "Админ"
   },
   "button_create_item": "Добавить айтем",
   "button_back": "Назад",

@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import TUserData from "@/types/user/TUserData";
 import getUserData from "@/utils/getUserData";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function UsersView() {
     const [userData, setUserData] = useState<TUserData | null>();
     const router = useRouter();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (
@@ -22,7 +24,9 @@ export default function UsersView() {
 
     return (
         <main className="px-4 mt-10 gap-5">
-            <h1 className="text-3xl font-semibold mb-5">Users table</h1>
+            <h1 className="text-3xl font-semibold mb-5">
+                {t("users_table.title")}
+            </h1>
             {userData && <UsersTable userData={userData} />}
         </main>
     );
