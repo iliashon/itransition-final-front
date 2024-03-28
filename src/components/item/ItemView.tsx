@@ -26,8 +26,6 @@ export default function ItemView({
         setUserData(getUserData());
     }, []);
 
-    console.log(item);
-
     return (
         <main className="mt-5 px-4 max-w-[1320px] mx-auto">
             <div className="mb-5">

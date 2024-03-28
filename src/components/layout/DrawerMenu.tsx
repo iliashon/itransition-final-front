@@ -10,9 +10,11 @@ import SelectLanguage from "@/components/layout/SelectLanguage";
 import TUserData from "@/types/user/TUserData";
 import Link from "next/link";
 import SearchByItems from "@/components/layout/SearchByItems";
+import { useTranslation } from "react-i18next";
 
 export default function DrawerMenu({ userData }: { userData?: TUserData }) {
     const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+    const { t } = useTranslation();
 
     const handleOpenDrawer = () => {
         setIsOpenDrawer(true);
@@ -53,7 +55,7 @@ export default function DrawerMenu({ userData }: { userData?: TUserData }) {
                         className="opacity-50 hover:opacity-100 duration-300"
                         onClick={handleCloseDrawer}
                     >
-                        Collections
+                        {t("layout.collections_link")}
                     </Link>
                     {userData?.is_admin && (
                         <Link
@@ -61,7 +63,7 @@ export default function DrawerMenu({ userData }: { userData?: TUserData }) {
                             className="opacity-50 hover:opacity-100 duration-300"
                             onClick={handleCloseDrawer}
                         >
-                            Users
+                            {t("layout.user_link")}
                         </Link>
                     )}
                 </div>

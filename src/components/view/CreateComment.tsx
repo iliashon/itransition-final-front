@@ -3,6 +3,7 @@ import TUserData from "@/types/user/TUserData";
 import TCommentList from "@/types/comment/TCommentList";
 import CommentService from "@/services/comment.service";
 import Avatar from "@/components/view/Avatar";
+import { useTranslation } from "react-i18next";
 
 export default function CreateComment({
     userData,
@@ -14,6 +15,7 @@ export default function CreateComment({
     item_id: number;
 }) {
     const [text, setText] = useState("");
+    const { t } = useTranslation();
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -37,7 +39,7 @@ export default function CreateComment({
             <div className="flex flex-col gap-3 w-full relative pb-14 rounded-lg">
                 <textarea
                     value={text}
-                    placeholder="Add your comment..."
+                    placeholder={t("comment.create_comment_placeholder")}
                     onChange={(event) => setText(event.target.value)}
                     className="h-[100px] rounded-lg p-3 resize-none bg-transparent focus:outline-none"
                 />
@@ -46,7 +48,7 @@ export default function CreateComment({
                     type="submit"
                     className="bg-black text-white dark:bg-white dark:text-black py-2 px-5 rounded-lg absolute right-2 bottom-2 font-semibold text-sm"
                 >
-                    Send
+                    {t("button_send")}
                 </button>
             </div>
         </form>

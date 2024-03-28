@@ -7,6 +7,7 @@ import { Alert } from "@material-tailwind/react";
 import { PiWarningCircle } from "react-icons/pi";
 import useAuth from "@/hooks/useAuth";
 import { ClipLoader } from "react-spinners";
+import { useTranslation } from "react-i18next";
 
 const REGEX_EMAIL = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
@@ -18,6 +19,7 @@ export default function SignUpForm() {
     const [isHiddenPass, setIsHiddenPass] = useState(true);
     const [error, setError] = useState<string>();
     const { register: registration, loading } = useAuth();
+    const { t } = useTranslation();
 
     const {
         register,
@@ -49,9 +51,9 @@ export default function SignUpForm() {
             )}
             <input
                 type="text"
-                placeholder="First name"
+                placeholder={t("layout.auth_modal.first_name_placeholder")}
                 {...register("first_name", {
-                    required: "This field is required",
+                    required: t("layout.auth_modal.error.require"),
                 })}
                 className={`${style.input} ${errors.first_name ? "border-red-500" : ""}`}
             />
@@ -69,9 +71,9 @@ export default function SignUpForm() {
             )}
             <input
                 type="text"
-                placeholder="Last name"
+                placeholder={t("layout.auth_modal.last_name_placeholder")}
                 {...register("last_name", {
-                    required: "This field is required",
+                    required: t("layout.auth_modal.error.require"),
                 })}
                 className={`${style.input} ${errors.last_name ? "border-red-500" : ""}`}
             />
@@ -89,12 +91,12 @@ export default function SignUpForm() {
             )}
             <input
                 type="text"
-                placeholder="Email"
+                placeholder={t("layout.auth_modal.email_placeholder")}
                 {...register("email", {
-                    required: "This field is required",
+                    required: t("layout.auth_modal.error.require"),
                     pattern: {
                         value: REGEX_EMAIL,
-                        message: "Check mail format example@gmail.com",
+                        message: t("layout.auth_modal.error.email"),
                     },
                 })}
                 className={`${style.input} ${errors.email ? "border-red-500" : ""}`}
@@ -114,12 +116,12 @@ export default function SignUpForm() {
             <div className="relative">
                 <input
                     type={isHiddenPass ? "password" : "text"}
-                    placeholder="Password"
+                    placeholder={t("layout.auth_modal.pass_placeholder")}
                     {...register("password", {
-                        required: "This field is required",
+                        required: t("layout.auth_modal.error.require"),
                         minLength: {
                             value: 8,
-                            message: "Minimum 8 characters",
+                            message: t("layout.auth_modal.error.password"),
                         },
                     })}
                     className={`${style.input} pr-10 ${errors.password ? "border-red-500" : ""}`}
@@ -149,7 +151,7 @@ export default function SignUpForm() {
                 )}
             </div>
             <button className="bg-black text-white h-12 rounded-lg font-medium text-lg hover:opacity-70 duration-300">
-                Sign Up
+                {t("layout.auth_modal.signin_title")}
             </button>
             {loading && (
                 <div className="absolute -top-5 -bottom-4 -left-4 -right-4 rounded-xl backdrop-blur-sm flex justify-center items-center">

@@ -30,7 +30,7 @@ export default function CommentBlock({ item_id }: { item_id: number }) {
     return (
         <div className="max-w-[700px] mx-auto mt-5 mb-5">
             <h2 className="text-2xl font-semibold text-center">
-                {comments?.length} {t("comment")}
+                {t("comment.title")}({comments?.length})
             </h2>
             <div className="flex flex-col mt-5 gap-5">
                 {loading

@@ -5,11 +5,13 @@ import { useTheme } from "next-themes";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CiSearch } from "react-icons/ci";
+import { useTranslation } from "react-i18next";
 
 export default function SearchByItems({ className }: { className?: string }) {
     const [inputValue, setInputValue] = useState("");
     const router = useRouter();
     const params = useSearchParams();
+    const { t } = useTranslation();
 
     const handleSubmitSearch = (event: FormEvent) => {
         event.preventDefault();
@@ -26,7 +28,7 @@ export default function SearchByItems({ className }: { className?: string }) {
         <form className={className} onSubmit={handleSubmitSearch}>
             <input
                 className="w-full h-full focus:outline-none focus:dark:border-white/70 focus:border-black/70 rounded-lg text-sm px-3 pr-8 bg-transparent border dark:border-white/30 border-black/30"
-                placeholder="Search..."
+                placeholder={t("layout.search_placeholder")}
                 value={inputValue}
                 onChange={(event) => setInputValue(event.target.value)}
             />

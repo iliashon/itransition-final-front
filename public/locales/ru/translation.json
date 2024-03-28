@@ -1,3 +1,60 @@
 {
-  "comment": "Коментариев"
+  "layout": {
+    "search_placeholder": "Поиск...",
+    "collections_link": "Коллекции",
+    "user_link": "Пользователи",
+    "dashboard_link": "Панель управления",
+    "logout_link": "Выйти",
+    "login_link": "Войти",
+    "lang_placeholder": "Язык",
+    "dark_mode_label": "Тёмный режим",
+    "create_collection_tooltip": "Создать коллекцию",
+    "admin_badge": "Админ",
+    "auth_modal": {
+      "login_title": "Войти",
+      "signin_title": "Зарегистрироваться",
+      "email_placeholder": "Электронная почта",
+      "pass_placeholder": "Пароль",
+      "first_name_placeholder": "Имя",
+      "last_name_placeholder": "Фамилия",
+      "error": {
+        "require": "Это поле обязательно для заполнения",
+        "email": "Проверьте формат почты, например, example@gmail.com",
+        "password": "Минимум 8 символов"
+      }
+    }
+  },
+  "home": {
+    "title": "Коллекционный мир",
+    "description": "Поднимите свою страсть к коллекционированию на новый уровень с нашим интуитивно понятным приложением для коллекций. Создайте свою мечтательную коллекцию прямо сейчас",
+    "title_top_collection": "Топ 5 коллекций",
+    "title_last_items": "Последние созданные айтемы",
+    "button_collections": "Коллекции",
+    "button_read_more": "Подробнее"
+  },
+  "all_collection": {
+    "title": "Все коллекции"
+  },
+  "search_items": {
+    "title": "Результат поиска для:"
+  },
+  "table_col": {
+    "name": "Название",
+    "image": "Изображение",
+    "author": "Автор",
+    "count_item": "Количество айтемов",
+    "type": "Тип",
+    "created_at": "Время создания",
+    "like_count": "Количество лайков",
+    "tags": "Теги",
+    "collection_type": "Тип коллекции",
+    "collection": "Коллекция"
+  },
+  "button_create_item": "Добавить айтем",
+  "button_back": "Назад",
+  "button_send": "Отправить",
+  "comment": {
+    "create_comment_placeholder": "Добавь свой комментарий...",
+    "title": "Комментарии"
+  }
 }

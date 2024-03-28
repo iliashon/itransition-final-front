@@ -3,6 +3,7 @@
 import { Switch } from "@material-tailwind/react";
 import { useTheme } from "next-themes";
 import { ChangeEvent, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const DARK_MODE = "dark",
     LIGHT_MODE = "light";
@@ -10,6 +11,7 @@ const DARK_MODE = "dark",
 export default function SwitchColorMode() {
     const { theme, setTheme } = useTheme();
     const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
+    const { t } = useTranslation();
 
     const handleChangeColorMode = (event: ChangeEvent<HTMLInputElement>) => {
         const isDark = event.target.checked;
@@ -40,7 +42,7 @@ export default function SwitchColorMode() {
             labelProps={{
                 className: `${theme === "dark" ? "text-white" : "text-black"} text-sm`,
             }}
-            label="Dark mode"
+            label={t("layout.dark_mode_label")}
         />
     );
 }

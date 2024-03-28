@@ -1,9 +1,11 @@
 import { Option, Select } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import reloadPage from "@/utils/reloadPage";
+import { useTranslation } from "react-i18next";
 
 export default function SelectLanguage() {
     const [activeLang, setActiveLang] = useState<string>("");
+    const { t } = useTranslation();
 
     useEffect(() => {
         setActiveLang(localStorage.getItem("i18nextLng")!);
@@ -11,7 +13,7 @@ export default function SelectLanguage() {
 
     return (
         <Select
-            label="Language"
+            label={t("layout.lang_placeholder")}
             value={activeLang}
             animate={{
                 mount: { y: -10 },
@@ -27,7 +29,7 @@ export default function SelectLanguage() {
             }}
         >
             <Option value="en">English</Option>
-            <Option value="ru">Russian</Option>
+            <Option value="ru">Русский</Option>
         </Select>
     );
 }

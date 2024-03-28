@@ -15,6 +15,7 @@ import getUserData from "@/utils/getUserData";
 import ActionItems from "@/components/view/ActionItems";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { useTheme } from "next-themes";
+import { useTranslation } from "react-i18next";
 
 export default function ItemTable({
     data = [],
@@ -27,6 +28,7 @@ export default function ItemTable({
 }) {
     const [userData, setUserData] = useState<TUserData | null>();
     const theme = useTheme();
+    const { t } = useTranslation();
 
     useEffect(() => {
         setUserData(getUserData());
@@ -36,7 +38,7 @@ export default function ItemTable({
         () => [
             {
                 accessorKey: "name",
-                header: "Name",
+                header: t("table_col.name"),
                 Cell: (props) => (
                     <Link
                         href={`/item/${props.row.original.id}`}
@@ -48,7 +50,7 @@ export default function ItemTable({
             },
             {
                 accessorKey: "image_url",
-                header: "Image",
+                header: t("table_col.image"),
                 Cell: (props) => (
                     <Image
                         src={
@@ -63,11 +65,11 @@ export default function ItemTable({
             },
             {
                 accessorKey: "_count.like",
-                header: "Likes count",
+                header: t("table_col.like_count"),
             },
             {
                 accessorKey: "item_tag",
-                header: "Tags",
+                header: t("table_col.tags"),
                 Cell: (props) => {
                     return (
                         <div className="w-full flex gap-1 flex-wrap">
@@ -88,7 +90,7 @@ export default function ItemTable({
             },
             {
                 accessorKey: "created_at",
-                header: "Created time",
+                header: t("table_col.created_at"),
                 Cell: (props) =>
                     new Date(props.row.original.created_at).toLocaleString(),
             },
@@ -120,7 +122,7 @@ export default function ItemTable({
                         href={`/item/create/${collection.id}`}
                         className="bg-gray-600 py-2 rounded-lg text-sm px-4 text-white"
                     >
-                        Create Item
+                        {t("button_create_item")}
                     </Link>
                 )
             );

@@ -14,9 +14,11 @@ import { MdDashboard } from "react-icons/md";
 import useAuth from "@/hooks/useAuth";
 import Link from "next/link";
 import { RiAdminFill } from "react-icons/ri";
+import { useTranslation } from "react-i18next";
 
 export default function UserMenu({ userData }: { userData: TUserData }) {
     const { logout } = useAuth();
+    const { t } = useTranslation();
 
     return (
         <Menu placement="bottom-end">
@@ -43,7 +45,7 @@ export default function UserMenu({ userData }: { userData: TUserData }) {
                     <span className="text-[11px]">{userData.email}</span>
                     {userData?.is_admin && (
                         <span className="text-[12px] text-white bg-green-500 rounded-lg flex gap-1 items-center justify-center">
-                            Admin
+                            {t("layout.admin_badge")}
                             <RiAdminFill />
                         </span>
                     )}
@@ -51,7 +53,7 @@ export default function UserMenu({ userData }: { userData: TUserData }) {
                 <hr className="my-2" />
                 <MenuItem className="flex gap-3 items-center">
                     <MdDashboard className="h-5 w-5" />
-                    <Link href="/dashboard">Dashboard</Link>
+                    <Link href="/dashboard">{t("layout.dashboard_link")}</Link>
                 </MenuItem>
                 <hr className="my-2" />
                 <MenuItem
@@ -59,7 +61,7 @@ export default function UserMenu({ userData }: { userData: TUserData }) {
                     onClick={() => logout()}
                 >
                     <HiLogout className="h-5 w-5" />
-                    Logout
+                    {t("layout.logout_link")}
                 </MenuItem>
             </MenuList>
         </Menu>

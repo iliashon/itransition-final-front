@@ -7,6 +7,7 @@ import TopFiveCollection from "@/components/view/TopFiveCollection";
 import TCollectionData from "@/types/collection/TCollectionData";
 import TItemData from "@/types/item/TItemData";
 import LastItems from "@/components/view/LastItems";
+import { useTranslation } from "react-i18next";
 
 export default function HomeView({
     tagsCloud,
@@ -17,26 +18,22 @@ export default function HomeView({
     topCollection: TCollectionData[];
     lastItems: TItemData[];
 }) {
+    const { t } = useTranslation();
+
     return (
         <main className="px-4 mt-10 sm:mt-20">
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:px-10">
                 <div className="flex flex-col gap-7">
-                    <h1 className="text-5xl font-bold">
-                        Collectible
-                        <br />
-                        World
-                    </h1>
+                    <h1 className="text-5xl font-bold">{t("home.title")}</h1>
                     <p className="text-sm text-gray-500 w-3/4">
-                        Take your collecting passion to new heights with our
-                        intuitive collection app. Create your dream collection
-                        now
+                        {t("home.description")}
                     </p>
                     <div className="flex gap-5 items-center">
                         <Link
                             href="/collection"
                             className="bg-black dark:bg-white dark:text-black py-2 w-40 rounded-lg text-white flex justify-center text-sm font-semibold hover:shadow duration-300"
                         >
-                            Collections
+                            {t("home.button_collections")}
                         </Link>
                     </div>
                 </div>
@@ -65,12 +62,12 @@ export default function HomeView({
             </section>
             <hr className="my-10" />
             <h2 className="font-bold text-3xl text-center">
-                Top 5 collections
+                {t("home.title_top_collection")}
             </h2>
             <TopFiveCollection data={topCollection} />
             <hr className="my-10" />
             <h2 className="font-bold text-3xl text-center">
-                Latest created items
+                {t("home.title_last_items")}
             </h2>
             <LastItems data={lastItems} />
         </main>

@@ -18,6 +18,7 @@ import { Button } from "@material-tailwind/react";
 import { MdOutlineSaveAlt } from "react-icons/md";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { useTheme } from "next-themes";
+import { useTranslation } from "react-i18next";
 
 const csvConfig = mkConfig({
     fieldSeparator: ",",
@@ -31,6 +32,7 @@ export default function AllCollectionTable() {
     const [data, setData] = useState<TCollectionData[]>([]);
     const [loading, setLoading] = useState(true);
     const theme = useTheme();
+    const { t } = useTranslation();
 
     const getCollections = () => {
         setLoading(true);
@@ -67,7 +69,7 @@ export default function AllCollectionTable() {
         () => [
             {
                 accessorKey: "name",
-                header: "Name",
+                header: t("table_col.name"),
                 size: 70,
                 Cell: (props) => (
                     <Link
@@ -80,7 +82,7 @@ export default function AllCollectionTable() {
             },
             {
                 accessorKey: "image_url",
-                header: "Image",
+                header: t("table_col.image"),
                 size: 100,
                 Cell: (props) => (
                     <Image
@@ -96,22 +98,22 @@ export default function AllCollectionTable() {
             },
             {
                 accessorKey: "user",
-                header: "Author",
+                header: t("table_col.author"),
                 Cell: (props) =>
                     `${props.row.original.user.first_name} ${props.row.original.user.last_name}`,
             },
             {
                 accessorKey: "_count.item",
-                header: "Count item",
+                header: t("table_col.count_item"),
                 Cell: (props) => `${props.row.original._count.item}`,
             },
             {
                 accessorKey: "type",
-                header: "Type",
+                header: t("table_col.type"),
             },
             {
                 accessorKey: "created_at",
-                header: "Create time",
+                header: t("table_col.created_at"),
                 Cell: (props) =>
                     new Date(props.row.original.created_at).toLocaleString(),
             },

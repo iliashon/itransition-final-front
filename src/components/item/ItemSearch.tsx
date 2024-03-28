@@ -13,12 +13,14 @@ import { TSearchItemData } from "@/types/item/TItemData";
 import Image from "next/image";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { useTheme } from "next-themes";
+import { useTranslation } from "react-i18next";
 
 export default function ItemSearch() {
     const [data, setData] = useState<TSearchItemData[]>();
     const [loading, setLoading] = useState(true);
     const params = useSearchParams();
     const theme = useTheme();
+    const { t } = useTranslation();
 
     useEffect(() => {
         setLoading(true);
@@ -32,7 +34,7 @@ export default function ItemSearch() {
         () => [
             {
                 accessorKey: "name",
-                header: "Name",
+                header: t("table_col.name"),
                 Cell: (props) => (
                     <Link
                         href={`/item/${props.row.original.id}`}
@@ -44,7 +46,7 @@ export default function ItemSearch() {
             },
             {
                 accessorKey: "image_url",
-                header: "Image",
+                header: t("table_col.image"),
                 Cell: (props) => {
                     return (
                         <Image
@@ -61,14 +63,14 @@ export default function ItemSearch() {
             },
             {
                 accessorKey: "collection.user.first_name",
-                header: "Author",
+                header: t("table_col.author"),
                 Cell: (props) => {
                     return `${props.row.original.collection.user.first_name} ${props.row.original.collection.user.last_name}`;
                 },
             },
             {
                 accessorKey: "collection.name",
-                header: "Collection",
+                header: t("table_col.collection"),
                 Cell: (props) => {
                     return (
                         <Link
@@ -81,14 +83,14 @@ export default function ItemSearch() {
             },
             {
                 accessorKey: "collection.type",
-                header: "Collection type",
+                header: t("table_col.collection_type"),
                 Cell: (props) => {
                     return props.row.original.collection.type;
                 },
             },
             {
                 accessorKey: "item_tag",
-                header: "Tags",
+                header: t("table_col.tags"),
                 Cell: (props) => {
                     return (
                         <div className="w-full flex gap-1 flex-wrap">
@@ -109,7 +111,7 @@ export default function ItemSearch() {
             },
             {
                 accessorKey: "created_at",
-                header: "Create time",
+                header: t("table_col.created_at"),
                 Cell: (props) =>
                     new Date(props.row.original.created_at).toLocaleString(),
             },
@@ -139,7 +141,7 @@ export default function ItemSearch() {
     return (
         <main className="px-4">
             <h1 className="font-semibold text-2xl my-5">
-                Search results for: {params.get("search")}
+                {t("search_items.title")} {params.get("search")}
             </h1>
 
             <ThemeProvider
