@@ -6,7 +6,7 @@ export default function CollectionList() {
         <main className="px-4">
             <div className="flex justify-between items-center">
                 <h1 className="text-3xl font-bold py-7">All collections</h1>
-                <BackButton />
+                <BackButton backPath={"/"} />
             </div>
             <AllCollectionTable />
         </main>
