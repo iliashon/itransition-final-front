@@ -11,6 +11,7 @@ import TCollectionData from "@/types/collection/TCollectionData";
 import TagsView from "@/components/view/TagsView";
 import BackButton from "@/components/view/BackButton";
 import AttributesView from "@/components/view/AttributesView";
+import Link from "next/link";
 
 export default function ItemView({
     item,
@@ -24,6 +25,8 @@ export default function ItemView({
     useEffect(() => {
         setUserData(getUserData());
     }, []);
+
+    console.log(item);
 
     return (
         <main className="mt-5 px-4 max-w-[1320px] mx-auto">
@@ -44,14 +47,28 @@ export default function ItemView({
                             {item.name}
                         </h1>
                         <TagsView tags={item.tags} />
+                        <AttributesView attributes={item.attributes} />
                     </div>
-                    <AttributesView attributes={item.attributes} />
                     <div className="flex w-full justify-between items-center">
-                        <Like item_id={item.id} user_id={userData?.id} />
+                        <div className="flex gap-3">
+                            <Like item_id={item.id} user_id={userData?.id} />
+                            <Link href={`/collection/${collection.id}`}>
+                                {collection.name}
+                            </Link>
+                        </div>
+
                         {(collection.user_id === userData?.id && (
-                            <ActionItems item={item} />
+                            <ActionItems
+                                item_id={item.id}
+                                collection_id={item.collection_id}
+                            />
                         )) ||
-                            (userData?.is_admin && <ActionItems item={item} />)}
+                            (userData?.is_admin && (
+                                <ActionItems
+                                    item_id={item.id}
+                                    collection_id={item.collection_id}
+                                />
+                            ))}
                     </div>
                 </div>
             </div>

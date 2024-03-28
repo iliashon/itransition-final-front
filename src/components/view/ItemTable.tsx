@@ -5,7 +5,7 @@ import {
     MRT_ColumnDef,
     useMaterialReactTable,
 } from "material-react-table";
-import TItemData from "@/types/item/TItemData";
+import TItemData, { TItemTableView } from "@/types/item/TItemData";
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export default function ItemTable({
     editAction,
     collection,
 }: {
-    data?: TItemData[];
+    data?: TItemTableView[];
     editAction: boolean;
     collection: TCollectionData;
 }) {
@@ -32,7 +32,7 @@ export default function ItemTable({
         setUserData(getUserData());
     }, []);
 
-    const columns = useMemo<MRT_ColumnDef<TItemData>[]>(
+    const columns = useMemo<MRT_ColumnDef<TItemTableView>[]>(
         () => [
             {
                 accessorKey: "name",
@@ -62,6 +62,31 @@ export default function ItemTable({
                 ),
             },
             {
+                accessorKey: "_count.like",
+                header: "Likes count",
+            },
+            {
+                accessorKey: "item_tag",
+                header: "Tags",
+                Cell: (props) => {
+                    return (
+                        <div className="w-full flex gap-1 flex-wrap">
+                            {props.row.original.item_tag.map((item) => {
+                                return (
+                                    <Link
+                                        href={`/item?search=${item.tag.text}`}
+                                        className="border dark:border-white/50 border-black/50 px-2 py-1 rounded-lg hover:scale-95 duration-300"
+                                        key={item.tag.id}
+                                    >
+                                        {item.tag.text}
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    );
+                },
+            },
+            {
                 accessorKey: "created_at",
                 header: "Created time",
                 Cell: (props) =>
@@ -75,14 +100,18 @@ export default function ItemTable({
         columns,
         data,
         enablePagination: true,
-        enableRowActions: !!userData,
+        enableRowActions:
+            userData?.id === collection.user_id || userData?.is_admin,
         mrtTheme: {
             baseBackgroundColor: theme.theme === "dark" ? "#1e1e1e" : "#fff",
         },
         renderRowActions: ({ row }) => {
-            if (userData?.id === collection.user_id || userData?.is_admin) {
-            }
-            return <ActionItems item={row.original} />;
+            return (
+                <ActionItems
+                    item_id={row.original.id}
+                    collection_id={row.original.collection_id}
+                />
+            );
         },
         renderTopToolbarCustomActions: (props) => {
             return (
