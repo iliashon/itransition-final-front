@@ -18,13 +18,13 @@ export default function LastItems() {
     }
 
     return (
-        <section className="px-0 lg:px-10 pt-10 grid lg:grid-cols-3 lg:grid-rows-2 grid-cols-1 gap-5">
+        <section className="px-0 h-[600px] lg:px-10 pt-10 grid lg:grid-cols-3 lg:grid-rows-2 grid-cols-1 gap-5">
             {items.map((item, index) => {
                 if (index === 2) {
                     return (
                         <article
                             key={item.id}
-                            className="row-span-2 h-60 lg:h-full w-full overflow-hidden rounded-lg relative"
+                            className="row-span-2 w-full h-60 lg:h-full overflow-hidden rounded-lg relative"
                         >
                             <img
                                 src={item.image_url || "/imageNotFound.jpeg"}
@@ -49,7 +49,7 @@ export default function LastItems() {
                 return (
                     <article
                         key={item.id}
-                        className="h-60 w-full overflow-hidden rounded-lg bg-white relative"
+                        className="w-full h-60 lg:h-full overflow-hidden rounded-lg bg-white relative"
                     >
                         <img
                             src={item.image_url || "/imageNotFound.jpeg"}

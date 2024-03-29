@@ -21,7 +21,7 @@ export default function TopFiveCollection() {
     }
 
     return (
-        <section className="px-0 lg:px-10 pt-10 grid lg:grid-cols-3 lg:grid-rows-2 grid-cols-1 gap-5">
+        <section className="px-0 h-[600px] lg:px-10 pt-10 grid lg:grid-cols-3 lg:grid-rows-2 grid-cols-1 gap-5">
             {collections.map((collection, index) => {
                 if (index === 0) {
                     return (
@@ -55,7 +55,7 @@ export default function TopFiveCollection() {
                 return (
                     <article
                         key={collection.id}
-                        className="h-60 w-full overflow-hidden rounded-lg bg-white relative"
+                        className="h-60 lg:h-full w-full overflow-hidden rounded-lg bg-white relative"
                     >
                         <img
                             src={collection.image_url || "/imageNotFound.jpeg"}
