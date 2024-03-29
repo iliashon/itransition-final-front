@@ -4,21 +4,18 @@ import Link from "next/link";
 import TTagsCloud from "@/types/tag/TTagsCloud";
 import { TagCloud } from "react-tagcloud";
 import TopFiveCollection from "@/components/view/TopFiveCollection";
-import TCollectionData from "@/types/collection/TCollectionData";
-import TItemData from "@/types/item/TItemData";
 import LastItems from "@/components/view/LastItems";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import TagService from "@/services/tag.service";
 
-export default function HomeView({
-    tagsCloud,
-    topCollection,
-    lastItems,
-}: {
-    tagsCloud: TTagsCloud[];
-    topCollection: TCollectionData[];
-    lastItems: TItemData[];
-}) {
+export default function HomeView() {
     const { t } = useTranslation();
+    const [tags, setTags] = useState<TTagsCloud[]>([]);
+
+    useEffect(() => {
+        TagService.getTagsCloud().then((res) => setTags(res.data));
+    }, []);
 
     return (
         <main className="px-4 mt-10 sm:mt-20">
@@ -39,7 +36,7 @@ export default function HomeView({
                 </div>
                 <TagCloud
                     className="flex flex-wrap"
-                    tags={tagsCloud}
+                    tags={tags}
                     maxSize={50}
                     minSize={20}
                     shuffle
@@ -64,12 +61,12 @@ export default function HomeView({
             <h2 className="font-bold text-3xl text-center">
                 {t("home.title_top_collection")}
             </h2>
-            <TopFiveCollection data={topCollection} />
+            <TopFiveCollection />
             <hr className="my-10" />
             <h2 className="font-bold text-3xl text-center">
                 {t("home.title_last_items")}
             </h2>
-            <LastItems data={lastItems} />
+            <LastItems />
         </main>
     );
 }

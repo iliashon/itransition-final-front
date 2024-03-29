@@ -1,13 +1,25 @@
 import TItemData from "@/types/item/TItemData";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import ItemService from "@/services/item.service";
+import SkeletonLoadingHome from "@/components/view/SkeletonLoadingHome";
 
-export default function LastItems({ data }: { data: TItemData[] }) {
+export default function LastItems() {
     const { t } = useTranslation();
+    const [items, setItems] = useState<TItemData[]>([]);
+
+    useEffect(() => {
+        ItemService.getLastItems().then((res) => setItems(res.data));
+    }, []);
+
+    if (!items.length) {
+        return <SkeletonLoadingHome />;
+    }
 
     return (
         <section className="px-0 lg:px-10 pt-10 grid lg:grid-cols-3 lg:grid-rows-2 grid-cols-1 gap-5">
-            {data.map((item, index) => {
+            {items.map((item, index) => {
                 if (index === 2) {
                     return (
                         <article

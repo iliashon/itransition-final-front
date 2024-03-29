@@ -4,17 +4,25 @@ import Link from "next/link";
 import TCollectionData from "@/types/collection/TCollectionData";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import CollectionService from "@/services/collection.service";
+import SkeletonLoadingHome from "@/components/view/SkeletonLoadingHome";
 
-export default function TopFiveCollection({
-    data,
-}: {
-    data: TCollectionData[];
-}) {
+export default function TopFiveCollection() {
     const { t } = useTranslation();
+    const [collections, setCollections] = useState<TCollectionData[]>([]);
+
+    useEffect(() => {
+        CollectionService.getTop().then((res) => setCollections(res.data));
+    }, []);
+
+    if (!collections.length) {
+        return <SkeletonLoadingHome />;
+    }
 
     return (
         <section className="px-0 lg:px-10 pt-10 grid lg:grid-cols-3 lg:grid-rows-2 grid-cols-1 gap-5">
-            {data.map((collection, index) => {
+            {collections.map((collection, index) => {
                 if (index === 0) {
                     return (
                         <article
