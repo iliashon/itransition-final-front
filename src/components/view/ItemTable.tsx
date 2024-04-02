@@ -19,11 +19,11 @@ import { useTranslation } from "react-i18next";
 
 export default function ItemTable({
     data = [],
-    editAction,
+    addedAction,
     collection,
 }: {
     data?: TItemTableView[];
-    editAction: boolean;
+    addedAction: boolean;
     collection: TCollectionData;
 }) {
     const [userData, setUserData] = useState<TUserData | null>();
@@ -117,7 +117,7 @@ export default function ItemTable({
         },
         renderTopToolbarCustomActions: (props) => {
             return (
-                editAction && (
+                addedAction && (
                     <Link
                         href={`/item/create/${collection.id}`}
                         className="bg-gray-600 py-2 rounded-lg text-sm px-4 text-white"

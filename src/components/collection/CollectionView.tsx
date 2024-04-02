@@ -64,8 +64,8 @@ export default function CollectionView({
             <hr />
             <ItemTable
                 data={items}
-                editAction={
-                    collection.id === userData?.id || !!userData?.is_admin
+                addedAction={
+                    collection.user_id === userData?.id || !!userData?.is_admin
                 }
                 collection={collection}
             />
